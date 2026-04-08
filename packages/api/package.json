@@ -1,0 +1,29 @@
+{
+  "name": "@craft/api",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@craft/auth": "workspace:*",
+    "@craft/db": "workspace:*",
+    "@craft/env": "workspace:*",
+    "@orpc/client": "catalog:",
+    "@orpc/openapi": "catalog:",
+    "@orpc/server": "catalog:",
+    "@orpc/zod": "catalog:",
+    "dotenv": "catalog:",
+    "next": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@craft/config": "workspace:*",
+    "typescript": "^5"
+  }
+}
