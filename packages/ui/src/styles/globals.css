@@ -1,14 +1,84 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "@radix-ui/colors/black-alpha.css";
+@import "@radix-ui/colors/white-alpha.css";
+@import "@radix-ui/colors/gray.css";
+@import "@radix-ui/colors/gray-alpha.css";
+@import "@radix-ui/colors/gray-dark.css";
+@import "@radix-ui/colors/gray-dark-alpha.css";
+@import "@radix-ui/colors/blue.css";
+@import "@radix-ui/colors/blue-alpha.css";
+@import "@radix-ui/colors/blue-dark.css";
+@import "@radix-ui/colors/blue-dark-alpha.css";
+@import "@radix-ui/colors/indigo.css";
+@import "@radix-ui/colors/indigo-alpha.css";
+@import "@radix-ui/colors/indigo-dark.css";
+@import "@radix-ui/colors/indigo-dark-alpha.css";
+@import "@radix-ui/colors/amber.css";
+@import "@radix-ui/colors/amber-alpha.css";
+@import "@radix-ui/colors/amber-dark.css";
+@import "@radix-ui/colors/amber-dark-alpha.css";
+@import "@radix-ui/colors/orange.css";
+@import "@radix-ui/colors/orange-alpha.css";
+@import "@radix-ui/colors/orange-dark.css";
+@import "@radix-ui/colors/orange-dark-alpha.css";
+@import "@radix-ui/colors/red.css";
+@import "@radix-ui/colors/red-alpha.css";
+@import "@radix-ui/colors/red-dark.css";
+@import "@radix-ui/colors/red-dark-alpha.css";
+@import "@radix-ui/colors/cyan.css";
+@import "@radix-ui/colors/cyan-alpha.css";
+@import "@radix-ui/colors/cyan-dark.css";
+@import "@radix-ui/colors/cyan-dark-alpha.css";
+@import "@radix-ui/colors/tomato.css";
+@import "@radix-ui/colors/tomato-alpha.css";
+@import "@radix-ui/colors/tomato-dark.css";
+@import "@radix-ui/colors/tomato-dark-alpha.css";
+@import "@radix-ui/colors/pink.css";
+@import "@radix-ui/colors/pink-alpha.css";
+@import "@radix-ui/colors/pink-dark.css";
+@import "@radix-ui/colors/pink-dark-alpha.css";
+@import "@radix-ui/colors/crimson.css";
+@import "@radix-ui/colors/crimson-alpha.css";
+@import "@radix-ui/colors/crimson-dark.css";
+@import "@radix-ui/colors/crimson-dark-alpha.css";
+@import "@radix-ui/colors/plum.css";
+@import "@radix-ui/colors/plum-alpha.css";
+@import "@radix-ui/colors/plum-dark.css";
+@import "@radix-ui/colors/plum-dark-alpha.css";
+@import "@radix-ui/colors/purple.css";
+@import "@radix-ui/colors/purple-alpha.css";
+@import "@radix-ui/colors/purple-dark.css";
+@import "@radix-ui/colors/purple-dark-alpha.css";
+@import "@radix-ui/colors/green.css";
+@import "@radix-ui/colors/green-alpha.css";
+@import "@radix-ui/colors/green-dark.css";
+@import "@radix-ui/colors/green-dark-alpha.css";
+@import "@radix-ui/colors/grass.css";
+@import "@radix-ui/colors/grass-alpha.css";
+@import "@radix-ui/colors/grass-dark.css";
+@import "@radix-ui/colors/grass-dark-alpha.css";
+@import "@radix-ui/colors/yellow.css";
+@import "@radix-ui/colors/yellow-alpha.css";
+@import "@radix-ui/colors/yellow-dark.css";
+@import "@radix-ui/colors/yellow-dark-alpha.css";
+@import "@radix-ui/colors/gold.css";
+@import "@radix-ui/colors/gold-alpha.css";
+@import "@radix-ui/colors/gold-dark.css";
+@import "@radix-ui/colors/gold-dark-alpha.css";
+
 @source "../../../apps/**/*.{ts,tsx}";
 @source "../**/*.{ts,tsx}";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-	--background: oklch(1 0 0);
+	--background-1: oklch(1 0 0);
+	--background-2: oklch(0.985 0 0);
+
 	--foreground: oklch(0.145 0 0);
+
 	--card: oklch(1 0 0);
 	--card-foreground: oklch(0.145 0 0);
 	--popover: oklch(1 0 0);
@@ -42,8 +112,10 @@
 }
 
 .dark {
-	--background: oklch(0.145 0 0);
+	--background-1: oklch(0.146 0 0);
+	--background-2: oklch(0 0 0);
 	--foreground: oklch(0.985 0 0);
+
 	--card: oklch(0.205 0 0);
 	--card-foreground: oklch(0.985 0 0);
 	--popover: oklch(0.205 0 0);
@@ -76,7 +148,78 @@
 }
 
 @theme inline {
-	--font-sans: "Inter Variable", sans-serif;
+	--font-sans: var(--font-inter), sans-serif;
+	--font-serif: "Instrument Serif", serif;
+	--font-mono: var(--font-geist-mono), monospace;
+
+	/* --- HEADINGS --- */
+	--text-heading-1: 2.75rem;
+	--text-heading-1--line-height: 3.25rem;
+	--text-heading-1--letter-spacing: -0.01em;
+	--text-heading-1--font-weight: 600;
+
+	--text-heading-2: 2.25rem;
+	--text-heading-2--line-height: 2.75rem;
+	--text-heading-2--letter-spacing: -0.01em;
+	--text-heading-2--font-weight: 600;
+
+	--text-heading-3: 1.75rem;
+	--text-heading-3--line-height: 2.25rem;
+	--text-heading-3--letter-spacing: -0.01em;
+	--text-heading-3--font-weight: 600;
+
+	--text-heading-4: 1.5rem;
+	--text-heading-4--line-height: 2rem;
+	--text-heading-4--letter-spacing: -0.01em;
+	--text-heading-4--font-weight: 500;
+
+	--text-heading-5: 1.25rem;
+	--text-heading-5--line-height: 1.5rem;
+	--text-heading-5--letter-spacing: -0.01em;
+	--text-heading-5--font-weight: 500;
+
+	/* --- BODY TEXT --- */
+	--text-body-lg: 1.125rem;
+	--text-body-lg--line-height: 1.5rem;
+	--text-body-lg--letter-spacing: normal;
+	--text-body-lg--font-weight: 400;
+
+	--text-body-base: 0.9375rem;
+	--text-body-base--line-height: 1.5rem;
+	--text-body-base--letter-spacing: normal;
+	--text-body-base--font-weight: 400;
+
+	--text-body-sm: 0.8125rem;
+	--text-body-sm--line-height: 1.25rem;
+	--text-body-sm--letter-spacing: normal;
+	--text-body-sm--font-weight: 400;
+
+	/* --- CAPTIONS & LABELS --- */
+	--text-caption-lg: 0.75rem;
+	--text-caption-lg--line-height: 1rem;
+	--text-caption-lg--letter-spacing: normal;
+	--text-caption-lg--font-weight: 400;
+
+	--text-caption-base: 0.6875rem;
+	--text-caption-base--line-height: 1rem;
+	--text-caption-base--letter-spacing: normal;
+	--text-caption-base--font-weight: 400;
+
+	--text-caption-sm: 0.625rem;
+	--text-caption-sm--line-height: 1rem;
+	--text-caption-sm--letter-spacing: normal;
+	--text-caption-sm--font-weight: 400;
+
+	--text-caption-xs: 0.5rem;
+	--text-caption-xs--line-height: 0.75rem;
+	--text-caption-xs--letter-spacing: normal;
+	--text-caption-xs--font-weight: 400;
+
+	--color-foreground: var(--foreground);
+	--color-background: var(--background-1);
+	--color-background-1: var(--background-1);
+	--color-background-2: var(--background-2);
+
 	--color-sidebar-ring: var(--sidebar-ring);
 	--color-sidebar-border: var(--sidebar-border);
 	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -106,8 +249,7 @@
 	--color-popover: var(--popover);
 	--color-card-foreground: var(--card-foreground);
 	--color-card: var(--card);
-	--color-foreground: var(--foreground);
-	--color-background: var(--background);
+
 	--radius-sm: calc(var(--radius) - 4px);
 	--radius-md: calc(var(--radius) - 2px);
 	--radius-lg: var(--radius);
@@ -123,7 +265,7 @@
 	}
 
 	body {
-		@apply font-sans bg-background text-foreground;
+		@apply font-sans bg-background-2 text-foreground;
 	}
 
 	html {
