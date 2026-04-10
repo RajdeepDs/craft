@@ -33,7 +33,7 @@ const buttonVariants = cva("cft-btn cft-btn-rounded", {
 function Button({
 	className,
 	variant = "primary",
-	size = "md",
+	size = "lg",
 	...props
 }: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
 	return (

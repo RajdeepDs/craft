@@ -39,7 +39,7 @@ export default function Header() {
 					</nav>
 					<div className="flex flex-1 items-center justify-end gap-2">
 						<UserMenu />
-						<Button size={"md"} variant={"secondary"}>
+						<Button size={"lg"} variant={"secondary"}>
 							<span>Join waitlist</span>
 						</Button>
 					</div>
