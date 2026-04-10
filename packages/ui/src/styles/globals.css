@@ -63,8 +63,7 @@
 @import "@radix-ui/colors/gold-alpha.css";
 @import "@radix-ui/colors/gold-dark.css";
 @import "@radix-ui/colors/gold-dark-alpha.css";
-
-@source "../../../apps/**/*.{ts,tsx}";
+@source "../../../../apps/**/*.{ts,tsx}";
 @source "../**/*.{ts,tsx}";
 
 @custom-variant dark (&:is(.dark *));

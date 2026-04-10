@@ -1,9 +1,10 @@
+import { HeroHome } from "@/components/home/hero-home";
+
 export default function HomePage() {
 	return (
-		<main>
-			<section>
-				<h1 className="text-heading-1">Welcome to the Home Page</h1>
-				<p>This is the main content of the home page.</p>
+		<main className="flex flex-col">
+			<section className="container mx-auto px-6 sm:max-w-7xl">
+				<HeroHome />
 			</section>
 		</main>
 	);
