@@ -384,7 +384,7 @@
 
 	.cft-btn-secondary {
 		color: var(--color-foreground);
-		background-color: var(--color-component-on-container-strong);
+		background-color: var(--color-component-on-inverted);
 		border: 1px solid var(--color-border-default);
 
 		@media (hover: hover) and (pointer: fine) {
@@ -486,6 +486,56 @@
 
 	html {
 		@apply font-sans;
+	}
+
+	html,
+	body {
+		@apply isolate relative flex h-full min-h-svh flex-1 flex-col overflow-hidden;
+		-webkit-app-region: no-drag;
+	}
+
+	::selection {
+		color: var(--foreground);
+		background: var(--gray-a6);
+	}
+
+	::-moz-selection {
+		color: var(--foreground);
+		background: var(--gray-a6);
+	}
+
+	:focus:not(:focus-visible) {
+		outline: none;
+	}
+
+	.scrollbar-hide {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+
+	.scrollbar-hide::-webkit-scrollbar {
+		display: none;
+	}
+
+	::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: var(--gray-a4);
+		background-clip: padding-box;
+		border: 2px solid transparent;
+		border-radius: 9999px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: var(--gray-a6);
+		background-clip: padding-box;
 	}
 
 	@media (prefers-reduced-motion: reduce) {

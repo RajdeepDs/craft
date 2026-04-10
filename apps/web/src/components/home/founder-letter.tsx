@@ -185,7 +185,7 @@ export function FounderLetter() {
 	return (
 		<motion.section
 			animate={{ opacity: 1, filter: "blur(0px)" }}
-			className="relative mx-auto my-28 max-w-2xl rounded-2xl border border-border/50 bg-white p-4 shadow-foreground/5 shadow-xl sm:p-12 dark:bg-gray-1 dark:shadow-foreground/10"
+			className="relative mx-auto my-28 max-w-2xl rounded-2xl border border-border-default/50 bg-background-1 p-4 shadow-standout/5 shadow-xl sm:p-12"
 			initial={containerInitial}
 			transition={{
 				delay: shouldReduceMotion ? 0 : INITIAL_DELAY - 0.3,
@@ -193,11 +193,6 @@ export function FounderLetter() {
 				ease: shouldReduceMotion ? undefined : NORMAL_EASE,
 			}}
 		>
-			<div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-2xl">
-				<div className="pointer-events-none absolute -bottom-1/2 -left-1/4 size-full rounded-full bg-linear-to-t from-alpha-1/50 to-transparent blur-3xl" />
-				<div className="pointer-events-none absolute -top-1/4 -right-1/4 size-[80%] rounded-full bg-linear-to-b from-alpha-1/30 to-transparent blur-3xl" />
-			</div>
-
 			<div className="flex flex-col gap-4">
 				<AnimatedHeading delayOffset={HEADING_DELAY}>
 					Introducing Craft
