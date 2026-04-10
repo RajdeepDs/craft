@@ -1,3 +1,10 @@
-export default function Home() {
-	return <>Hello! Welcome to the Home page!</>;
+export default function HomePage() {
+	return (
+		<main>
+			<section>
+				<h1 className="">Welcome to the Home Page</h1>
+				<p>This is the main content of the home page.</p>
+			</section>
+		</main>
+	);
 }

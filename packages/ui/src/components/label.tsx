@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@craft/ui/lib/utils";
 import type * as React from "react";
 
@@ -6,7 +8,7 @@ function Label({ className, ...props }: React.ComponentProps<"label">) {
 		// biome-ignore lint: Generic label component - htmlFor or children control is provided by consumer
 		<label
 			className={cn(
-				"flex select-none items-center gap-2 text-xs leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50",
+				"flex select-none items-center gap-2 font-medium text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50",
 				className
 			)}
 			data-slot="label"
