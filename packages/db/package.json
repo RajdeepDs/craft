@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@craft/env": "workspace:*",
+    "@neondatabase/serverless": "^1.0.2",
     "dotenv": "catalog:",
     "drizzle-orm": "^0.45.1",
     "pg": "^8.17.1",

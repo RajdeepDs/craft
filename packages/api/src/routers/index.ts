@@ -26,7 +26,7 @@ export const appRouter = {
 				.limit(1);
 
 			if (existingEntry.length > 0) {
-				throw new ORPCError("EMAIL_ALREADY_REGISTERED");
+				throw new ORPCError("You're already on the waitlist.");
 			}
 
 			await context.db.insert(waitlist).values({
