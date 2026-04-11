@@ -2,12 +2,10 @@ import { createDb } from "@craft/db";
 import * as schema from "@craft/db/schema/auth";
 import { waitlist } from "@craft/db/schema/waitlist";
 import { env } from "@craft/env/server";
-import { checkout, polar, portal } from "@polar-sh/better-auth";
 import { APIError, betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 import { and, eq } from "drizzle-orm";
-import { polarClient } from "./lib/payments";
 
 const WAITLIST_REJECTION_MESSAGE =
 	"You're on the waitlist. We'll notify you once you're approved.";
@@ -34,28 +32,31 @@ export function createAuth() {
 				},
 			},
 		},
+		onAPIError: {
+			errorURL: "/login",
+		},
 		trustedOrigins: [env.CORS_ORIGIN],
 		secret: env.BETTER_AUTH_SECRET,
 		baseURL: env.BETTER_AUTH_URL,
 		plugins: [
-			polar({
-				client: polarClient,
-				createCustomerOnSignUp: true,
-				enableCustomerPortal: true,
-				use: [
-					checkout({
-						products: [
-							{
-								productId: "your-product-id",
-								slug: "pro",
-							},
-						],
-						successUrl: env.POLAR_SUCCESS_URL,
-						authenticatedUsersOnly: true,
-					}),
-					portal(),
-				],
-			}),
+			// polar({
+			// 	client: polarClient,
+			// 	createCustomerOnSignUp: true,
+			// 	enableCustomerPortal: true,
+			// 	use: [
+			// 		checkout({
+			// 			products: [
+			// 				{
+			// 					productId: "your-product-id",
+			// 					slug: "pro",
+			// 				},
+			// 			],
+			// 			successUrl: env.POLAR_SUCCESS_URL,
+			// 			authenticatedUsersOnly: true,
+			// 		}),
+			// 		portal(),
+			// 	],
+			// }),
 			nextCookies(),
 		],
 		databaseHooks: {

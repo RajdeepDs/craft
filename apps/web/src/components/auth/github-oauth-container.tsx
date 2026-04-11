@@ -145,7 +145,7 @@ export function GitHubOAuthContainer() {
 									ease: "easeInOut",
 								}}
 							>
-								<Icon className="size-5" name="IconLoadingCircle" />
+								<Icon className="size-5" name="IconLoader" />
 							</motion.div>
 						</motion.div>
 
