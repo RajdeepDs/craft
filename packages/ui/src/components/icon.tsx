@@ -138,7 +138,6 @@ export const Icon: FC<UnifiedIconProps> = ({
 			: outlineCandidate;
 
 	if (!SelectedComponent) {
-		console.warn(`[Icon] "${name}" not found in outline or filled modules.`);
 		return null;
 	}
 
@@ -170,7 +169,6 @@ export function createWrappedIcon(
 	const outlined = outlinedModule ? outlinedModule[iconName] : null;
 
 	if (!outlined) {
-		console.warn(`Icon "${iconName}" not found in outlined module`);
 		return null;
 	}
 

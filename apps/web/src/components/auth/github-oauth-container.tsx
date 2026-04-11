@@ -153,7 +153,7 @@ export function GitHubOAuthContainer() {
 							className="text-center text-body-sm text-secondary-foreground"
 							variants={itemVariants}
 						>
-							Redirecting to GitHub...
+							Redirecting to GitHub…
 						</motion.p>
 					</motion.div>
 				) : (

@@ -48,6 +48,9 @@ export function JoinWaitlistForm() {
 			<form.Field name="email">
 				{(field) => (
 					<Field>
+						<label className="sr-only" htmlFor={field.name}>
+							Email address
+						</label>
 						<Input
 							className="h-9 placeholder:text-[13px]"
 							id={field.name}
@@ -75,7 +78,7 @@ export function JoinWaitlistForm() {
 						size="lg"
 						type="submit"
 					>
-						{mutation.isPending ? "Submitting..." : "Submit"}
+						{mutation.isPending ? "Submitting…" : "Submit"}
 					</Button>
 				)}
 			</form.Subscribe>
