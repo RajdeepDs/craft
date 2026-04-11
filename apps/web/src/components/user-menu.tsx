@@ -1,6 +1,7 @@
 "use client";
 
-import { Button } from "@craft/ui/components/button";
+import { ButtonLink } from "@craft/ui/components/button";
+import type { Route } from "next";
 import { authClient } from "@/lib/auth-client";
 
 export default function UserMenu() {
@@ -8,7 +9,9 @@ export default function UserMenu() {
 
 	if (!session) {
 		return (
-			<Button variant={"tertiary"}>{session ? "Dashboard" : "Login"}</Button>
+			<ButtonLink href={"/login" as Route} variant={"tertiary"}>
+				{session ? "Dashboard" : "Login"}
+			</ButtonLink>
 		);
 	}
 }

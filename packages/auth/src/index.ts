@@ -1,12 +1,16 @@
 import { createDb } from "@craft/db";
 import * as schema from "@craft/db/schema/auth";
+import { waitlist } from "@craft/db/schema/waitlist";
 import { env } from "@craft/env/server";
 import { checkout, polar, portal } from "@polar-sh/better-auth";
-import { betterAuth } from "better-auth";
+import { APIError, betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
-
+import { and, eq } from "drizzle-orm";
 import { polarClient } from "./lib/payments";
+
+const WAITLIST_REJECTION_MESSAGE =
+	"You're on the waitlist. We'll notify you once you're approved.";
 
 export function createAuth() {
 	const db = createDb();
@@ -14,13 +18,23 @@ export function createAuth() {
 	return betterAuth({
 		database: drizzleAdapter(db, {
 			provider: "pg",
-
 			schema,
 		}),
-		trustedOrigins: [env.CORS_ORIGIN],
-		emailAndPassword: {
-			enabled: true,
+		socialProviders: {
+			github: {
+				clientId: env.GITHUB_CLIENT_ID,
+				clientSecret: env.GITHUB_CLIENT_SECRET,
+			},
 		},
+		user: {
+			additionalFields: {
+				onboardingCompleted: {
+					type: "boolean",
+					defaultValue: false,
+				},
+			},
+		},
+		trustedOrigins: [env.CORS_ORIGIN],
 		secret: env.BETTER_AUTH_SECRET,
 		baseURL: env.BETTER_AUTH_URL,
 		plugins: [
@@ -44,6 +58,65 @@ export function createAuth() {
 			}),
 			nextCookies(),
 		],
+		databaseHooks: {
+			user: {
+				create: {
+					before: async (user) => {
+						const acceptedRow = await db
+							.select({ id: waitlist.id })
+							.from(waitlist)
+							.where(
+								and(eq(waitlist.email, user.email), eq(waitlist.accepted, true))
+							)
+							.limit(1);
+
+						if (acceptedRow.length === 0) {
+							throw new APIError("UNAUTHORIZED", {
+								message: WAITLIST_REJECTION_MESSAGE,
+							});
+						}
+
+						return { data: user };
+					},
+				},
+			},
+			session: {
+				create: {
+					before: async (session) => {
+						const [currentUser] = await db
+							.select({ email: schema.user.email })
+							.from(schema.user)
+							.where(eq(schema.user.id, session.userId))
+							.limit(1);
+
+						if (!currentUser?.email) {
+							throw new APIError("UNAUTHORIZED", {
+								message: "Unable to verify access. Please try again.",
+							});
+						}
+
+						const acceptedRow = await db
+							.select({ id: waitlist.id })
+							.from(waitlist)
+							.where(
+								and(
+									eq(waitlist.email, currentUser.email),
+									eq(waitlist.accepted, true)
+								)
+							)
+							.limit(1);
+
+						if (acceptedRow.length === 0) {
+							throw new APIError("UNAUTHORIZED", {
+								message: WAITLIST_REJECTION_MESSAGE,
+							});
+						}
+
+						return { data: session };
+					},
+				},
+			},
+		},
 	});
 }
 

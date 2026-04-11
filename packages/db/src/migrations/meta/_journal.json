@@ -8,6 +8,13 @@
       "when": 1775894067983,
       "tag": "0000_vengeful_stone_men",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1775922263111,
+      "tag": "0001_brainy_ogun",
+      "breakpoints": true
     }
   ]
 }
