@@ -38,6 +38,13 @@ export function createAuth() {
 		trustedOrigins: [env.CORS_ORIGIN],
 		secret: env.BETTER_AUTH_SECRET,
 		baseURL: env.BETTER_AUTH_URL,
+		advanced: {
+			useSecureCookies: env.NODE_ENV === "production",
+		},
+		session: {
+			expiresIn: 60 * 60 * 24 * 7,
+			updateAge: 60 * 60 * 24,
+		},
 		plugins: [
 			// polar({
 			// 	client: polarClient,
