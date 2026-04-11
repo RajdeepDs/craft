@@ -1,6 +1,8 @@
 import { Button as ButtonPrimitive } from "@base-ui/react/button";
 import { cn } from "@craft/ui/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
+import Link from "next/link";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 const buttonVariants = cva("cft-btn cft-btn-rounded", {
 	variants: {
@@ -45,4 +47,33 @@ function Button({
 	);
 }
 
-export { Button, buttonVariants };
+interface SharedLinkProps extends VariantProps<typeof buttonVariants> {
+	children: ReactNode;
+	className?: string;
+}
+
+export type ButtonLinkProps = Omit<
+	ComponentPropsWithoutRef<typeof Link>,
+	"className"
+> &
+	SharedLinkProps;
+
+function ButtonLink({
+	children,
+	className,
+	variant = "primary",
+	size = "lg",
+	...props
+}: ButtonLinkProps) {
+	return (
+		<Link
+			className={cn(buttonVariants({ variant, size }), className)}
+			data-slot="button-link"
+			{...props}
+		>
+			{children}
+		</Link>
+	);
+}
+
+export { Button, ButtonLink, buttonVariants };

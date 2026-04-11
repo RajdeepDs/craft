@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@craft/ui/components/button";
+import { ButtonLink } from "@craft/ui/components/button";
 import type { Route } from "next";
 import Link from "next/link";
 import { WordMark } from "../ui/word-mark";
@@ -39,9 +39,13 @@ export default function Header() {
 					</nav>
 					<div className="flex flex-1 items-center justify-end gap-2">
 						<UserMenu />
-						<Button size={"lg"} variant={"secondary"}>
-							<span>Join waitlist</span>
-						</Button>
+						<ButtonLink
+							href={"/waitlist" as Route}
+							size={"lg"}
+							variant={"secondary"}
+						>
+							Join waitlist
+						</ButtonLink>
 					</div>
 				</div>
 			</div>
