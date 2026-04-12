@@ -57,6 +57,7 @@
     },
     "deploy": {
       "dependsOn": ["db:migrate", "build"],
+      "env": ["DATABASE_URL"],
       "cache": false
     }
   }
