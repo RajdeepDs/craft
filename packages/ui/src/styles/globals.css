@@ -78,6 +78,38 @@
 	--background-1: oklch(0.146 0 0);
 	--background-2: oklch(0 0 0);
 	--foreground: oklch(0.985 0 0);
+	--color-page: #0b0b0b;
+	--color-shell: var(--color-black-fill);
+	--color-container: var(--gray-1);
+	--color-modal: #070707e6;
+	--color-card: var(--gray-a2);
+	--color-sunken: var(--black-a6);
+	--color-standout: var(--gray-3);
+	--color-component: var(--gray-a3);
+	--color-component-hover: var(--gray-a4);
+	--color-component-active: var(--gray-a5);
+	--color-component-on-sunken: var(--gray-4);
+	--color-component-on-inverted: var(--black-a2);
+	--color-component-on-container-subtle: var(--gray-a2);
+	--color-component-on-container-subtle-hover: var(--gray-a3);
+	--color-component-on-container-strong: var(--gray-a3);
+	--color-component-on-container-strong-hover: var(--gray-a4);
+	--color-transparent: var(--color-black-transparent);
+	--color-transparent-hover: var(--gray-a4);
+	--color-inverted-solid: var(--white-a12);
+	--color-inverted-solid-hover: var(--white-a10);
+	--color-inverted-solid-active: var(--white-a9);
+	--color-on-inverted-foreground: var(--color-black-fill);
+	--color-on-standout-primary-foreground: var(--gray-a12);
+	--color-on-positive-solid-foreground: var(--color-white-fill);
+	--color-on-warning-solid-foreground: var(--color-white-fill);
+	--color-on-danger-solid-foreground: var(--color-white-fill);
+	--color-on-danger-subtle-foreground: var(--tomato-a11);
+	--color-on-warning-subtle-foreground: var(--orange-a11);
+	--color-on-positive-subtle-foreground: var(--green-a11);
+	--color-on-brand-subtle-foreground: var(--blue-a11);
+	--color-border-inverted: var(--color-white-fill);
+	--color-brand-border-focus: var(--blue-a9);
 }
 
 @theme inline {
@@ -199,6 +231,7 @@
 	--color-transparent: var(--color-black-transparent);
 	--color-transparent-hover: var(--gray-a3);
 	--color-transparent-active: var(--gray-a3);
+	--color-sunken: var(--gray-1);
 	--color-primary-solid: var(--black-a12);
 	--color-primary-solid-hover: var(--black-a10);
 	--color-primary-solid-active: var(--black-a11);
@@ -219,6 +252,7 @@
 	--color-inverted-solid: var(--black-a12);
 	--color-inverted-solid-hover: var(--black-a10);
 	--color-inverted-solid-active: var(--black-a9);
+	--color-on-standout-secondary-foreground: var(--gray-a7);
 	--color-disabled: var(--gray-a3);
 	--color-primary-foreground: var(--gray-a12);
 	--color-secondary-foreground: var(--gray-a11);
@@ -235,8 +269,10 @@
 	--color-on-brand-subtle-foreground: var(--indigo-a9);
 	--color-on-positive-subtle-foreground: var(--green-a9);
 	--color-on-warning-subtle-foreground: var(--orange-a9);
-	--color-on-danger-solid-foreground: var(--tomato-1);
-	--color-on-danger-subtle-foreground: var(--tomato-a9);
+	--color-on-danger-solid-foreground: var(--color-white-fill);
+	--color-on-danger-subtle-foreground: var(--tomato-a11);
+	--color-on-positive-solid-foreground: var(--color-white-fill);
+	--color-on-warning-solid-foreground: var(--color-white-fill);
 	--color-border-default: var(--gray-a3);
 	--color-border-subtle: var(--gray-a2);
 	--color-border-strong: var(--gray-a6);
@@ -367,24 +403,24 @@
 	}
 
 	.cft-btn-primary {
-		color: var(--color-on-brand-solid-foreground);
-		background-color: var(--color-primary-solid);
+		color: var(--color-on-inverted-foreground);
+		background-color: var(--color-inverted-solid);
 		border: 1px solid transparent;
 
 		@media (hover: hover) and (pointer: fine) {
 			&:hover {
-				background-color: var(--color-primary-solid-hover);
+				background-color: var(--color-inverted-solid-hover);
 			}
 		}
 
 		&:active {
-			background-color: var(--color-primary-solid-active);
+			background-color: var(--color-inverted-solid-active);
 		}
 	}
 
 	.cft-btn-secondary {
 		color: var(--color-foreground);
-		background-color: var(--color-component-on-inverted);
+		background-color: var(--color-component-on-container-strong);
 		border: 1px solid var(--color-border-default);
 
 		@media (hover: hover) and (pointer: fine) {
