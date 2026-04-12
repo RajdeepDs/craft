@@ -4,6 +4,7 @@ import { Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 
 import "../index.css";
+import Script from "next/script";
 import Providers from "@/components/providers";
 
 const interVariable = localFont({
@@ -30,6 +31,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" suppressHydrationWarning>
+			<Script
+				data-website-id="4cd7ce21-7f53-4683-ae09-275933e6bdd7"
+				defer
+				src="https://cloud.umami.is/script.js"
+			/>
 			<body
 				className={`${interVariable.variable} ${geistMono.variable} antialiased`}
 			>
