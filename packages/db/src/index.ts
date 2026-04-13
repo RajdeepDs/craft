@@ -1,12 +1,9 @@
 import { env } from "@craft/env/server";
 import { neon } from "@neondatabase/serverless";
 import { drizzle as drizzleNeon } from "drizzle-orm/neon-http";
-import { drizzle as drizzlePg } from "drizzle-orm/node-postgres";
-import pg from "pg";
+import { drizzle } from "drizzle-orm/node-postgres";
 
 import * as schema from "./schema";
-
-const { Pool } = pg;
 
 export function createDb() {
 	if (env.NODE_ENV === "production") {
@@ -14,8 +11,7 @@ export function createDb() {
 		return drizzleNeon(sql, { schema });
 	}
 
-	const pool = new Pool({ connectionString: env.DATABASE_URL });
-	return drizzlePg(pool, { schema });
+	return drizzle(env.DATABASE_URL, { schema });
 }
 
 export const db = createDb();

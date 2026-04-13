@@ -15,6 +15,13 @@
       "when": 1775922263111,
       "tag": "0001_brainy_ogun",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1776091374008,
+      "tag": "0002_perpetual_dracula",
+      "breakpoints": true
     }
   ]
 }
