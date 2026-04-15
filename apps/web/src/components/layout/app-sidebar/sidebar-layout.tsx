@@ -21,7 +21,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
 			<div
 				className={cn(
 					"flex h-full min-h-0 flex-1 flex-col overflow-hidden bg-page",
-					!isMobile && "rounded-lg border"
+					!isMobile && "cft-border-shadow ml-px rounded-lg"
 				)}
 			>
 				{children}

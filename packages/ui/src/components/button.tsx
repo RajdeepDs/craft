@@ -13,7 +13,7 @@ const buttonVariants = cva(buttonBaseStyles, {
 			primary:
 				"bg-primary text-inverted-primary-foreground active:bg-primary-hover [@media(hover:hover)_and_(pointer:fine)]:hover:bg-primary-hover",
 			secondary:
-				"bg-secondary text-primary-foreground ring ring-border active:bg-secondary-hover [@media(hover:hover)_and_(pointer:fine)]:hover:bg-secondary-hover",
+				"cft-border-shadow hover:cft-border-shadow-hover bg-secondary text-primary-foreground active:bg-secondary-hover [@media(hover:hover)_and_(pointer:fine)]:hover:bg-secondary-hover",
 			tertiary:
 				"text-secondary-foreground hover:text-primary-foreground active:bg-tertiary-hover [@media(hover:hover)_and_(pointer:fine)]:hover:bg-tertiary-hover",
 		},

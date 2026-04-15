@@ -73,6 +73,11 @@
 
 	--secondary: var(--white-a12);
 	--secondary-hover: var(--white-a7);
+
+	--standout: var(--white-a10);
+	--standout-hover: var(--gray-a3);
+	--standout-foreground: var(--black-a11);
+	--standout-foreground-hover: var(--black-a12);
 }
 
 .dark {
@@ -81,6 +86,11 @@
 
 	--secondary: var(--white-a1);
 	--secondary-hover: var(--gray-a3);
+
+	--standout: var(--white-a2);
+	--standout-hover: var(--gray-a3);
+	--standout-foreground: var(--white-a11);
+	--standout-foreground-hover: var(--white-a12);
 }
 
 @theme inline {
@@ -131,20 +141,31 @@
 	--color-bg: var(--bg);
 	--color-page: var(--page);
 
+	--color-surface: var(--bg);
+	--color-surface-item-hover: var(--gray-a3);
+	--color-surface-item-active: var(--gray-a4);
+	--color-surface-item-foreground: var(--gray-11);
+	--color-surface-item-foreground-active: var(--gray-12);
+
+	--color-standout: var(--standout);
+	--color-standout-hover: var(--standout-hover);
+	--color-standout-foreground: var(--standout-foreground);
+	--color-standout-foreground-hover: var(--standout-foreground-hover);
+
 	--color-primary: var(--black-a12);
 	--color-primary-hover: var(--black-a11);
+	--color-primary-foreground: var(--gray-12);
+	--color-inverted-primary-foreground: var(--white-a12);
 
 	--color-secondary: var(--secondary);
 	--color-secondary-hover: var(--secondary-hover);
+	--color-secondary-foreground: var(--gray-11);
 
 	--color-tertiary-hover: var(--gray-a3);
 
-	--color-primary-foreground: var(--gray-12);
-	--color-inverted-primary-foreground: var(--white-a12);
-	--color-secondary-foreground: var(--gray-11);
-
-	--color-border: var(--gray-a3);
+	--color-border: var(--gray-3);
 	--color-ring: var(--indigo-a5);
+	--color-muted-ring: var(--gray-5);
 }
 
 @layer base {
@@ -206,5 +227,21 @@
 	::-webkit-scrollbar-thumb:hover {
 		background: var(--gray-a6);
 		background-clip: padding-box;
+	}
+}
+
+@layer utilities {
+	.cft-border-shadow {
+		box-shadow:
+			0px 0px 0px 1px rgba(0, 0, 0, 0.06),
+			0px 1px 2px -1px rgba(0, 0, 0, 0.06),
+			0px 2px 4px 0px rgba(0, 0, 0, 0.04);
+	}
+
+	.ctf-border-shadow-hover {
+		box-shadow:
+			0px 0px 0px 1px rgba(0, 0, 0, 0.08),
+			0px 1px 2px -1px rgba(0, 0, 0, 0.08),
+			0px 2px 4px 0px rgba(0, 0, 0, 0.06);
 	}
 }
