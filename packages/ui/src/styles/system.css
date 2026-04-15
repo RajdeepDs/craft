@@ -142,8 +142,8 @@
 	--color-page: var(--page);
 
 	--color-surface: var(--bg);
-	--color-surface-item-hover: var(--gray-a3);
-	--color-surface-item-active: var(--gray-a4);
+	--color-surface-item-hover: var(--gray-a2);
+	--color-surface-item-active: var(--gray-a3);
 	--color-surface-item-foreground: var(--gray-11);
 	--color-surface-item-foreground-active: var(--gray-12);
 

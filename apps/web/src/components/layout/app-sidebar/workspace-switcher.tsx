@@ -26,7 +26,7 @@ export function WorkspaceSwitcher() {
 				<DropdownMenu>
 					<DropdownMenuTrigger
 						render={
-							<SidebarMenuButton className="h-fit w-fit p-1 text-surface-item-foreground-active">
+							<SidebarMenuButton className="h-fit w-fit p-1 text-surface-item-foreground-active active:bg-surface-item-hover">
 								<Avatar
 									className="after:rounded-md after:border-none"
 									size="sm"
