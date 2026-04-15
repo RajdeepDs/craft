@@ -11,20 +11,20 @@ export default function EarlyAccessPage() {
 			</Link>
 			<div className="flex w-full flex-col items-center justify-center gap-7">
 				<div className="space-y-2 text-center">
-					<h1 className="text-balance font-medium text-heading-4">
+					<h1 className="text-balance font-medium text-h3">
 						Join the waitlist
 					</h1>
-					<p className="text-body-base text-secondary-foreground">
+					<p className="text-body-sm text-secondary-foreground">
 						We&apos;ll reach out when we open access.
 					</p>
 				</div>
 				<JoinWaitlistForm />
 			</div>
 			<div>
-				<p className="text-body-sm text-secondary-foreground">
+				<p className="text-label text-secondary-foreground">
 					Already been invited?{" "}
 					<Link
-						className="text-foreground underline underline-offset-2"
+						className="underline underline-offset-2 hover:text-primary-foreground"
 						href={"/login" as Route}
 					>
 						Sign in

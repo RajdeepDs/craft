@@ -37,7 +37,7 @@ function AnimatedParagraph({
 				filter: "blur(0px)",
 				scale: 1,
 			}}
-			className="text-[15px] text-secondary-foreground"
+			className="text-body-sm text-secondary-foreground"
 			initial={initial}
 			transition={{
 				delay: shouldReduceMotion ? 0 : delayOffset,
@@ -81,7 +81,7 @@ function AnimatedHeading({
 				filter: "blur(0px)",
 				scale: 1,
 			}}
-			className="text-balance font-medium text-foreground text-heading-5"
+			className="text-balance font-medium text-h3 text-primary-foreground"
 			initial={initial}
 			transition={{
 				delay: shouldReduceMotion ? 0 : delayOffset,
@@ -149,7 +149,7 @@ function AnimatedSignature({ delayOffset = 0 }: { delayOffset?: number }) {
 				filter: "blur(0px)",
 				scale: 1,
 			}}
-			className="flex flex-col gap-1 pt-8 text-body-base text-secondary-foreground"
+			className="flex flex-col gap-1 pt-8 text-body-sm text-secondary-foreground"
 			initial={initial}
 			transition={{
 				delay: shouldReduceMotion ? 0 : delayOffset,
@@ -157,7 +157,7 @@ function AnimatedSignature({ delayOffset = 0 }: { delayOffset?: number }) {
 				ease: shouldReduceMotion ? undefined : NORMAL_EASE,
 			}}
 		>
-			<span className="text-body-lg text-foreground">Rajdeep</span>
+			<span className="text-body-lg text-primary-foreground">Rajdeep</span>
 			<span>Founder, OneLens</span>
 		</motion.div>
 	);
@@ -185,7 +185,7 @@ export function FounderLetter() {
 	return (
 		<motion.section
 			animate={{ opacity: 1, filter: "blur(0px)" }}
-			className="relative mx-auto my-28 max-w-2xl rounded-2xl border border-border-default/50 bg-background-1 p-4 shadow-standout/5 shadow-xl sm:p-12"
+			className="relative mx-auto my-28 max-w-2xl rounded-2xl bg-page p-4 shadow-standout/5 shadow-xl sm:p-12"
 			initial={containerInitial}
 			transition={{
 				delay: shouldReduceMotion ? 0 : INITIAL_DELAY - 0.3,
@@ -202,7 +202,9 @@ export function FounderLetter() {
 				<AnimatedParagraph delayOffset={PARA_1_DELAY}>
 					I've watched engineering teams lose weeks every year to a problem
 					nobody talks about:{" "}
-					<span className="text-foreground">code review has no process.</span>
+					<span className="text-primary-foreground">
+						code review has no process.
+					</span>
 				</AnimatedParagraph>
 
 				<AnimatedParagraph delayOffset={PARA_2_DELAY}>
@@ -217,12 +219,12 @@ export function FounderLetter() {
 					for two days because nobody knows who's responsible. Reviewers who
 					leave forty comments with no indication of what's actually blocking
 					the merge. Authors who read{" "}
-					<em className="text-foreground">
+					<em className="text-primary-foreground">
 						"looks mostly good but a few things"
 					</em>{" "}
 					and have no idea what to fix first. Engineering leads who ask{" "}
-					<em className="text-foreground">"why is velocity down?"</em> and get
-					shrugged shoulders.
+					<em className="text-primary-foreground">"why is velocity down?"</em>{" "}
+					and get shrugged shoulders.
 				</AnimatedParagraph>
 
 				<AnimatedParagraph delayOffset={PARA_4_DELAY}>
@@ -231,11 +233,11 @@ export function FounderLetter() {
 				</AnimatedParagraph>
 
 				<AnimatedParagraph delayOffset={PARA_5_DELAY}>
-					<span className="text-foreground">Craft</span> is that product. It's
-					not a better diff viewer. It's not an AI that summarizes your PR. It's
-					the workflow layer that has always been missing — structured context
-					on every change, feedback that means something, verdicts that tell
-					everyone exactly what happens next.
+					<span className="text-primary-foreground">Craft</span> is that
+					product. It's not a better diff viewer. It's not an AI that summarizes
+					your PR. It's the workflow layer that has always been missing —
+					structured context on every change, feedback that means something,
+					verdicts that tell everyone exactly what happens next.
 				</AnimatedParagraph>
 
 				<AnimatedParagraph delayOffset={PARA_6_DELAY}>

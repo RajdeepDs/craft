@@ -213,7 +213,7 @@
 	--color-white-fill: #fff;
 	--color-black-fill: #000;
 	--color-black-transparent: #0000;
-	--color-page: var(--color-white-fill);
+	--color-page: var(--color-page);
 	--color-shell: #f6f6f6;
 	--color-container: var(--color-white-fill);
 	--color-modal: #ffffffb3;

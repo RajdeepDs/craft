@@ -100,7 +100,7 @@ export function HeroHome() {
 		<div className="relative mt-32">
 			<div className="relative flex flex-col gap-8 text-balance">
 				<div className="flex items-center text-wrap sm:max-w-lg md:max-w-3xl">
-					<h1 className="text-balance font-semibold text-3xl md:text-5xl">
+					<h1 className="text-balance font-semibold text-h1 md:text-display-lg">
 						<AnimatedWords
 							delayOffset={INITIAL_DELAY}
 							text="The review process your team has never had."
@@ -115,7 +115,7 @@ export function HeroHome() {
 							filter: "blur(0px)",
 							scale: 1,
 						}}
-						className="text-body-base text-secondary-foreground sm:max-w-lg md:max-w-3xl md:leading-7"
+						className="text-body-sm text-secondary-foreground sm:max-w-lg md:max-w-3xl md:leading-7"
 						initial={initialParagraph}
 						transition={{
 							delay: shouldReduceMotion ? 0 : BODY_DELAY,
@@ -142,7 +142,7 @@ export function HeroHome() {
 						}}
 					>
 						<Link
-							className="group relative whitespace-nowrap text-body-base text-secondary-foreground transition-colors duration-150 ease-out hover:text-foreground"
+							className="group relative whitespace-nowrap text-body-sm text-secondary-foreground transition-colors duration-150 ease-out hover:text-primary-foreground"
 							href={"/waitlist" as Route}
 						>
 							<span className="relative">

@@ -41,7 +41,7 @@ export default function Header() {
 						<UserMenu />
 						<ButtonLink
 							href={"/waitlist" as Route}
-							size={"lg"}
+							size={"md"}
 							variant={"secondary"}
 						>
 							Join waitlist

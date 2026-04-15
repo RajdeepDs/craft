@@ -120,7 +120,7 @@ export function GitHubOAuthContainer() {
 			</Suspense>
 
 			<motion.h1
-				className="text-balance text-center text-heading-4"
+				className="text-balance text-center font-medium text-h3"
 				variants={itemVariants}
 			>
 				Welcome to craft
@@ -179,7 +179,7 @@ export function GitHubOAuthContainer() {
 						</motion.div>
 
 						<motion.p
-							className="text-center text-body-sm text-secondary-foreground"
+							className="text-center text-caption text-secondary-foreground"
 							variants={itemVariants}
 						>
 							By signing in, you agree to our{" "}

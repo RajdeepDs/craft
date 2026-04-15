@@ -9,7 +9,7 @@ export default function UserMenu() {
 
 	if (!session) {
 		return (
-			<ButtonLink href={"/login" as Route} variant={"tertiary"}>
+			<ButtonLink href={"/login" as Route} size={"md"} variant={"tertiary"}>
 				{session ? "Dashboard" : "Login"}
 			</ButtonLink>
 		);

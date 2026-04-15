@@ -11,7 +11,7 @@ export default function LoginPage() {
 			</Link>
 			<GitHubOAuthContainer />
 			<div>
-				<p className="font-medium text-body-sm text-secondary-foreground">
+				<p className="text-label text-secondary-foreground">
 					Don&apos;t have an account?{" "}
 					<Link
 						className="text-foreground underline underline-offset-2"
