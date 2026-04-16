@@ -5,6 +5,7 @@ import {
 	Sidebar,
 	SidebarContent,
 	SidebarGroup,
+	SidebarGroupLabel,
 	SidebarHeader,
 	SidebarMenu,
 	SidebarMenuButton,
@@ -13,7 +14,7 @@ import {
 import type { Route } from "next";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { APP_SIDEBAR_ITEMS } from "@/config/app-sidebar";
+import { APP_SIDEBAR } from "@/config/app-sidebar";
 import { WorkspaceSwitcher } from "./workspace-switcher";
 
 export function AppSidebar() {
@@ -25,30 +26,35 @@ export function AppSidebar() {
 				<WorkspaceSwitcher />
 			</SidebarHeader>
 			<SidebarContent>
-				<SidebarGroup>
-					<SidebarMenu className="gap-px">
-						{APP_SIDEBAR_ITEMS.map((item) => {
-							const isActive = pathname === item.href;
-							return (
-								<SidebarMenuItem key={item.id}>
-									<SidebarMenuButton
-										className="pl-2"
-										isActive={isActive}
-										render={
-											<Link href={item.href as Route}>
-												<Icon
-													name={item.icon}
-													variant={isActive ? "filled" : "outline"}
-												/>
-												{item.label}
-											</Link>
-										}
-									/>
-								</SidebarMenuItem>
-							);
-						})}
-					</SidebarMenu>
-				</SidebarGroup>
+				{APP_SIDEBAR.map((section) => (
+					<SidebarGroup key={section.id}>
+						{section.label && (
+							<SidebarGroupLabel>{section.label}</SidebarGroupLabel>
+						)}
+						<SidebarMenu className="gap-px">
+							{section.items.map((item) => {
+								const isActive = pathname === item.href;
+								return (
+									<SidebarMenuItem key={item.id}>
+										<SidebarMenuButton
+											className="pl-2"
+											isActive={isActive}
+											render={
+												<Link href={item.href as Route}>
+													<Icon
+														name={item.icon}
+														variant={isActive ? "filled" : "outline"}
+													/>
+													{item.label}
+												</Link>
+											}
+										/>
+									</SidebarMenuItem>
+								);
+							})}
+						</SidebarMenu>
+					</SidebarGroup>
+				))}
 			</SidebarContent>
 		</Sidebar>
 	);

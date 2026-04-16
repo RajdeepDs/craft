@@ -1,23 +1,56 @@
-import type { IconName } from "@craft/ui/components/icon";
+interface SidebarSection {
+	id: string;
+	items: SidebarItem[];
+	label?: string;
+}
 
-export interface SidebarItem {
+interface SidebarItem {
 	href: string;
-	icon: IconName;
+	icon: string;
 	id: string;
 	label: string;
 }
 
-export const APP_SIDEBAR_ITEMS: SidebarItem[] = [
+export const APP_SIDEBAR: SidebarSection[] = [
 	{
-		id: "inbox",
-		label: "Inbox",
-		href: "/inbox",
-		icon: "IconInboxEmpty",
+		id: "core",
+		items: [
+			{
+				id: "inbox",
+				label: "Inbox",
+				href: "/inbox",
+				icon: "IconInboxEmpty",
+			},
+			{
+				id: "changes",
+				label: "Changes",
+				href: "/changes",
+				icon: "IconRandom",
+			},
+			{
+				id: "review",
+				label: "Review",
+				href: "/review",
+				icon: "IconArrow",
+			},
+		],
 	},
 	{
-		id: "my-changes",
-		label: "My Changes",
-		href: "/my-changes",
-		icon: "IconPullRequest",
+		id: "try",
+		label: "Try",
+		items: [
+			{
+				id: "connect-github",
+				label: "Connect GitHub",
+				href: "/settings/integrations/github",
+				icon: "IconGithub",
+			},
+			{
+				id: "invite",
+				label: "Invite people",
+				href: "/settings/invite",
+				icon: "IconPlusMedium",
+			},
+		],
 	},
 ];
