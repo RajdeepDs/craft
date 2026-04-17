@@ -144,8 +144,8 @@
 	--color-surface: var(--bg);
 	--color-surface-item-hover: var(--gray-a2);
 	--color-surface-item-active: var(--gray-a3);
-	--color-surface-item-foreground: var(--gray-11);
-	--color-surface-item-foreground-active: var(--gray-12);
+	--color-surface-item-foreground: var(--black-a8);
+	--color-surface-item-foreground-active: var(--black-a11);
 
 	--color-standout: var(--standout);
 	--color-standout-hover: var(--standout-hover);

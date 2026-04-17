@@ -1,4 +1,7 @@
+import type { IconName } from "@craft/ui/components/icon";
+
 interface SidebarSection {
+	collapsible?: boolean;
 	id: string;
 	items: SidebarItem[];
 	label?: string;
@@ -6,7 +9,7 @@ interface SidebarSection {
 
 interface SidebarItem {
 	href: string;
-	icon: string;
+	icon: IconName;
 	id: string;
 	label: string;
 }
@@ -31,13 +34,14 @@ export const APP_SIDEBAR: SidebarSection[] = [
 				id: "review",
 				label: "Review",
 				href: "/review",
-				icon: "IconArrow",
+				icon: "IconArrowsRepeatRightLeft",
 			},
 		],
 	},
 	{
-		id: "try",
-		label: "Try",
+		collapsible: true,
+		id: "setup",
+		label: "Setup",
 		items: [
 			{
 				id: "connect-github",
