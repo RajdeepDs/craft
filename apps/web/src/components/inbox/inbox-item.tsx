@@ -52,21 +52,21 @@ interface InboxItemCardProps {
 export function InboxItemCard({ item, isSelected, isRead, onSelect }: InboxItemCardProps) {
 	return (
 		<Item
-			className="cursor-pointer transition-[transform,background-color] duration-150 hover:bg-surface-item-hover active:scale-[0.98] data-[selected=true]:bg-surface-item-active"
+			className="cursor-default transition-[transform,background-color] duration-150 hover:bg-surface-item-hover data-[selected=true]:bg-surface-item-active"
 			data-selected={isSelected}
 			onClick={() => onSelect?.(item.id)}
 			variant="default"
 		>
 			<ItemMedia>
-				<Avatar className="size-10">
+				<Avatar className="size-8">
 					{item.author.avatar && <AvatarImage src={item.author.avatar} />}
 					<AvatarFallback>{getInitials(item.author.name)}</AvatarFallback>
 				</Avatar>
 			</ItemMedia>
-			<ItemContent className="min-w-0">
+			<ItemContent className="min-w-0 gap-0">
 				<ItemTitle className="w-full items-center">
 					{!isRead && <span className="size-1.5 shrink-0 rounded-full bg-(--indigo-a10)" />}
-					<span className="truncate">{item.title}</span>
+					<span className={`truncate ${isSelected ? "text-primary-foreground" : isRead ? "text-secondary-foreground" : ""}`}>{item.title}</span>
 				</ItemTitle>
 				<ItemDescription className="text-caption text-secondary-foreground">
 					{item.author.name} {actionLabel[item.action]}

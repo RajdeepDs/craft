@@ -14,11 +14,11 @@ export const metadata: Metadata = {
 export default function InboxPage() {
 	return (
 		<ResizablePanelGroup orientation="horizontal">
-			<ResizablePanel defaultSize="20%">
+			<ResizablePanel defaultSize="25%">
 				<InboxList />
 			</ResizablePanel>
 			<ResizableHandle />
-			<ResizablePanel defaultSize="65%">
+			<ResizablePanel defaultSize="75%">
 				{/* inbox change item detail view */}
 			</ResizablePanel>
 		</ResizablePanelGroup>
