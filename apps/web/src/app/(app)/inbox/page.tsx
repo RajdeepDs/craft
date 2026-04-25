@@ -4,7 +4,7 @@ import {
 	ResizablePanelGroup,
 } from "@craft/ui/components/resizable";
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/layout/page-header";
+import { InboxList } from "@/components/inbox/inbox-list";
 
 export const metadata: Metadata = {
 	title: "Inbox",
@@ -15,10 +15,12 @@ export default function InboxPage() {
 	return (
 		<ResizablePanelGroup orientation="horizontal">
 			<ResizablePanel defaultSize="20%">
-				<PageHeader title="Inbox" />
+				<InboxList />
 			</ResizablePanel>
 			<ResizableHandle />
-			<ResizablePanel defaultSize="65%">Right</ResizablePanel>
+			<ResizablePanel defaultSize="65%">
+				{/* inbox change item detail view */}
+			</ResizablePanel>
 		</ResizablePanelGroup>
 	);
 }
