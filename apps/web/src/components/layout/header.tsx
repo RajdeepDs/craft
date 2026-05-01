@@ -22,20 +22,18 @@ export default function Header() {
 						</Link>
 					</div>
 					<nav className="hidden flex-1 justify-center gap-4 text-[13px]">
-						{links.map(({ to, label }) => {
-							return (
-								<Link
-									className="group relative text-secondary-foreground transition-colors duration-150 ease-out hover:text-foreground"
-									href={to as Route}
-									key={to}
-								>
-									<span className="relative">
-										{label}
-										<span className="absolute -bottom-0.5 left-0 h-px w-0 bg-foreground transition-[width] duration-200 ease-out group-hover:w-full" />
-									</span>
-								</Link>
-							);
-						})}
+						{links.map(({ to, label }) => (
+							<Link
+								className="group relative text-secondary-foreground transition-colors duration-150 ease-out hover:text-foreground"
+								href={to as Route}
+								key={to}
+							>
+								<span className="relative">
+									{label}
+									<span className="absolute -bottom-0.5 left-0 h-px w-0 bg-foreground transition-[width] duration-200 ease-out group-hover:w-full" />
+								</span>
+							</Link>
+						))}
 					</nav>
 					<div className="flex flex-1 items-center justify-end gap-2">
 						<UserMenu />

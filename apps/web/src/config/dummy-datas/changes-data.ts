@@ -1,0 +1,671 @@
+import type {
+	Change,
+	ChangeStatus,
+	CommentType,
+	RiskLevel,
+	UserRole,
+	VerdictType,
+} from "@/types/craft";
+
+export const mockUsers = [
+	{
+		id: "usr_01hq8k2m3n4p5q6r7s8t9u0v",
+		name: "Karri Saarinen",
+		email: "karri@acme.com",
+		avatar_url: null,
+		initials: "KS",
+		role: "LEAD" as UserRole,
+		created_at: "2024-01-15T09:00:00.000Z",
+	},
+	{
+		id: "usr_02hq8k2m3n4p5q6r7s8t9u0v",
+		name: "Sarah Chen",
+		email: "sarah@acme.com",
+		avatar_url: null,
+		initials: "SC",
+		role: "REVIEWER" as UserRole,
+		created_at: "2024-01-15T09:00:00.000Z",
+	},
+	{
+		id: "usr_03hq8k2m3n4p5q6r7s8t9u0v",
+		name: "James Okafor",
+		email: "james@acme.com",
+		avatar_url: null,
+		initials: "JO",
+		role: "AUTHOR" as UserRole,
+		created_at: "2024-01-16T09:00:00.000Z",
+	},
+	{
+		id: "usr_04hq8k2m3n4p5q6r7s8t9u0v",
+		name: "Maya Patel",
+		email: "maya@acme.com",
+		avatar_url: null,
+		initials: "MP",
+		role: "AUTHOR" as UserRole,
+		created_at: "2024-01-17T09:00:00.000Z",
+	},
+	{
+		id: "usr_05hq8k2m3n4p5q6r7s8t9u0v",
+		name: "Tom Brennan",
+		email: "tom@acme.com",
+		avatar_url: null,
+		initials: "TB",
+		role: "AUTHOR" as UserRole,
+		created_at: "2024-01-18T09:00:00.000Z",
+	},
+	{
+		id: "usr_06hq8k2m3n4p5q6r7s8t9u0v",
+		name: "Vikram Nair",
+		email: "vikram@acme.com",
+		avatar_url: null,
+		initials: "VN",
+		role: "AUTHOR" as UserRole,
+		created_at: "2024-01-19T09:00:00.000Z",
+	},
+	{
+		id: "usr_07hq8k2m3n4p5q6r7s8t9u0v",
+		name: "Priya Sharma",
+		email: "priya@acme.com",
+		avatar_url: null,
+		initials: "PS",
+		role: "AUTHOR" as UserRole,
+		created_at: "2024-01-20T09:00:00.000Z",
+	},
+	{
+		id: "usr_08hq8k2m3n4p5q6r7s8t9u0v",
+		name: "Aman Gupta",
+		email: "aman@acme.com",
+		avatar_url: null,
+		initials: "AG",
+		role: "AUTHOR" as UserRole,
+		created_at: "2024-01-21T09:00:00.000Z",
+	},
+];
+
+export const mockChanges: Change[] = [
+	// ── DRAFTING ──────────────────────────────────────────
+
+	{
+		id: "crf_01hq8k2m3n4p5q6r7s8t9u0v",
+		identifier: "CRF-041",
+		title: "Refactor billing module to use Stripe v3 SDK",
+		status: "DRAFTING" as ChangeStatus,
+		risk_level: "MEDIUM" as RiskLevel,
+		author_id: "usr_07hq8k2m3n4p5q6r7s8t9u0v",
+		reviewer_ids: [],
+		affected_areas: ["billing", "payments"],
+		github_pr_url: null,
+		linked_issue_url: null,
+		brief: {
+			what_changed:
+				"Replaces the legacy Stripe v2 SDK with v3 across the billing module. Updates charge, refund, and webhook handling to use the new SDK interface.",
+			why: "Stripe is deprecating v2 in Q3. This migration unblocks the upcoming subscription overhaul and fixes 3 known race conditions in the refund flow.",
+			how_to_verify: [
+				{
+					id: "v1",
+					text: "Run billing integration tests — all should pass",
+					checked: false,
+				},
+				{
+					id: "v2",
+					text: "Trigger a test charge in staging and confirm receipt",
+					checked: false,
+				},
+				{
+					id: "v3",
+					text: "Trigger a refund in staging and confirm it processes correctly",
+					checked: false,
+				},
+			],
+			risk_notes:
+				"Touches payment processing directly. Rollback plan: feature flag on SDK version.",
+		},
+		comments: [],
+		verdict: null,
+		created_at: "2026-03-31T07:30:00.000Z",
+		ready_at: null,
+		first_review_at: null,
+		resolved_at: null,
+		shipped_at: null,
+	},
+
+	{
+		id: "crf_02hq8k2m3n4p5q6r7s8t9u0v",
+		identifier: "CRF-040",
+		title: "Add pagination to activity feed endpoint",
+		status: "DRAFTING" as ChangeStatus,
+		risk_level: "LOW" as RiskLevel,
+		author_id: "usr_08hq8k2m3n4p5q6r7s8t9u0v",
+		reviewer_ids: [],
+		affected_areas: ["api", "activity"],
+		github_pr_url: "https://github.com/acme/app/pull/312",
+		linked_issue_url: null,
+		brief: {
+			what_changed:
+				"Adds cursor-based pagination to GET /api/activity. Default page size 50, max 200. Adds next_cursor to response envelope.",
+			why: "Activity feed times out for users with more than 500 events. This is the immediate fix before we redesign the feed.",
+			how_to_verify: [
+				{
+					id: "v1",
+					text: "Hit /api/activity with no cursor — confirm first 50 returned",
+					checked: false,
+				},
+				{
+					id: "v2",
+					text: "Hit with next_cursor from first response — confirm next 50 returned",
+					checked: false,
+				},
+			],
+			risk_notes: null,
+		},
+		comments: [],
+		verdict: null,
+		created_at: "2026-03-31T08:15:00.000Z",
+		ready_at: null,
+		first_review_at: null,
+		resolved_at: null,
+		shipped_at: null,
+	},
+
+	// ── READY ─────────────────────────────────────────────
+
+	{
+		id: "crf_03hq8k2m3n4p5q6r7s8t9u0v",
+		identifier: "CRF-039",
+		title: "Rate limiting middleware for auth endpoints",
+		status: "READY" as ChangeStatus,
+		risk_level: "MEDIUM" as RiskLevel,
+		author_id: "usr_04hq8k2m3n4p5q6r7s8t9u0v",
+		reviewer_ids: ["usr_02hq8k2m3n4p5q6r7s8t9u0v"],
+		affected_areas: ["auth", "middleware"],
+		github_pr_url: "https://github.com/acme/app/pull/309",
+		linked_issue_url: null,
+		brief: {
+			what_changed:
+				"Adds rate limiting to /auth/login and /auth/refresh at 10 req/min per IP. Uses Redis sliding window. Returns 429 with Retry-After header.",
+			why: "We saw a credential stuffing attempt last week. This is the immediate mitigation while we implement proper bot detection.",
+			how_to_verify: [
+				{
+					id: "v1",
+					text: "Hit /auth/login 11 times in 60s — confirm 429 on 11th",
+					checked: false,
+				},
+				{
+					id: "v2",
+					text: "Confirm Retry-After header is present on 429 response",
+					checked: false,
+				},
+				{
+					id: "v3",
+					text: "Confirm legitimate login still works after window resets",
+					checked: false,
+				},
+			],
+			risk_notes:
+				"Redis dependency in auth path. If Redis is down, middleware fails open — logins still work.",
+		},
+		comments: [],
+		verdict: null,
+		created_at: "2026-03-30T11:00:00.000Z",
+		ready_at: "2026-03-30T14:20:00.000Z",
+		first_review_at: null,
+		resolved_at: null,
+		shipped_at: null,
+	},
+
+	{
+		id: "crf_04hq8k2m3n4p5q6r7s8t9u0v",
+		identifier: "CRF-038",
+		title: "Update onboarding copy for trial user flow",
+		status: "READY" as ChangeStatus,
+		risk_level: "LOW" as RiskLevel,
+		author_id: "usr_04hq8k2m3n4p5q6r7s8t9u0v",
+		reviewer_ids: ["usr_01hq8k2m3n4p5q6r7s8t9u0v"],
+		affected_areas: ["frontend", "onboarding"],
+		github_pr_url: null,
+		linked_issue_url: "https://linear.app/acme/issue/ACM-291",
+		brief: {
+			what_changed:
+				"Updates copy on 4 onboarding screens for trial users. No logic changes. Copy approved by product.",
+			why: "Current copy has 38% drop-off on step 3. New copy tested better in user interviews.",
+			how_to_verify: [
+				{
+					id: "v1",
+					text: "Walk through trial onboarding flow in staging",
+					checked: false,
+				},
+				{
+					id: "v2",
+					text: "Confirm no existing copy strings are broken",
+					checked: false,
+				},
+			],
+			risk_notes: null,
+		},
+		comments: [],
+		verdict: null,
+		created_at: "2026-03-31T06:00:00.000Z",
+		ready_at: "2026-03-31T06:45:00.000Z",
+		first_review_at: null,
+		resolved_at: null,
+		shipped_at: null,
+	},
+
+	{
+		id: "crf_05hq8k2m3n4p5q6r7s8t9u0v",
+		identifier: "CRF-037",
+		title: "Fix mobile nav z-index regression on iOS Safari",
+		status: "READY" as ChangeStatus,
+		risk_level: "LOW" as RiskLevel,
+		author_id: "usr_05hq8k2m3n4p5q6r7s8t9u0v",
+		reviewer_ids: ["usr_02hq8k2m3n4p5q6r7s8t9u0v"],
+		affected_areas: ["frontend", "mobile"],
+		github_pr_url: "https://github.com/acme/app/pull/308",
+		linked_issue_url: null,
+		brief: {
+			what_changed:
+				"Fixes z-index stacking on the mobile nav drawer introduced in CRF-031. Sets explicit stacking context on the drawer container.",
+			why: "Regression reported by 3 users. Nav drawer renders behind page content on iOS Safari 17.",
+			how_to_verify: [
+				{
+					id: "v1",
+					text: "Open nav drawer on iOS Safari 17 — confirm renders above content",
+					checked: false,
+				},
+				{
+					id: "v2",
+					text: "Confirm no z-index regression on Android Chrome",
+					checked: false,
+				},
+			],
+			risk_notes: null,
+		},
+		comments: [],
+		verdict: null,
+		created_at: "2026-03-31T09:00:00.000Z",
+		ready_at: "2026-03-31T09:30:00.000Z",
+		first_review_at: null,
+		resolved_at: null,
+		shipped_at: null,
+	},
+
+	// ── IN REVIEW ─────────────────────────────────────────
+
+	{
+		id: "crf_06hq8k2m3n4p5q6r7s8t9u0v",
+		identifier: "CRF-036",
+		title: "Migrate auth flow to new token service",
+		status: "IN_REVIEW" as ChangeStatus,
+		risk_level: "HIGH" as RiskLevel,
+		author_id: "usr_03hq8k2m3n4p5q6r7s8t9u0v",
+		reviewer_ids: ["usr_02hq8k2m3n4p5q6r7s8t9u0v"],
+		affected_areas: ["auth", "infra"],
+		github_pr_url: "https://github.com/acme/app/pull/305",
+		linked_issue_url: "https://linear.app/acme/issue/ACM-187",
+		brief: {
+			what_changed:
+				"Replaces JWT-based auth with TokenServiceV2. All session validation now routes through the new service. Removes 3 legacy middleware functions.",
+			why: "Legacy service has a race condition under high load. This migration unblocks the SSO rollout planned for Q2.",
+			how_to_verify: [
+				{
+					id: "v1",
+					text: "Run auth flow in staging — login, refresh, logout",
+					checked: true,
+				},
+				{
+					id: "v2",
+					text: "Confirm existing sessions are not invalidated on deploy",
+					checked: true,
+				},
+				{
+					id: "v3",
+					text: "Check error logs after deploy — zero new 401s expected",
+					checked: false,
+				},
+			],
+			risk_notes:
+				"High blast radius. Rollback requires a full redeploy. Coordinate with infra before merging.",
+		},
+		comments: [
+			{
+				id: "cmt_01hq8k2m3n4p5q6r7s8t9u0v",
+				author_id: "usr_02hq8k2m3n4p5q6r7s8t9u0v",
+				type: "BLOCKER" as CommentType,
+				body: "TokenServiceV2.validate() is async — you're not awaiting it on line 48. This will silently pass invalid tokens in production.",
+				line_reference: "auth/middleware.ts:48",
+				resolved: false,
+				resolved_by: null,
+				resolved_at: null,
+				created_at: "2026-03-31T10:15:00.000Z",
+			},
+			{
+				id: "cmt_02hq8k2m3n4p5q6r7s8t9u0v",
+				author_id: "usr_02hq8k2m3n4p5q6r7s8t9u0v",
+				type: "NIT" as CommentType,
+				body: "Variable name `t` on line 12 could be `token` for readability. Minor, not blocking.",
+				line_reference: "auth/token.ts:12",
+				resolved: false,
+				resolved_by: null,
+				resolved_at: null,
+				created_at: "2026-03-31T10:18:00.000Z",
+			},
+		],
+		verdict: null,
+		created_at: "2026-03-29T09:00:00.000Z",
+		ready_at: "2026-03-29T11:30:00.000Z",
+		first_review_at: "2026-03-29T14:00:00.000Z",
+		resolved_at: null,
+		shipped_at: null,
+	},
+
+	{
+		id: "crf_07hq8k2m3n4p5q6r7s8t9u0v",
+		identifier: "CRF-035",
+		title: "Refactor notification queue to use BullMQ",
+		status: "IN_REVIEW" as ChangeStatus,
+		risk_level: "MEDIUM" as RiskLevel,
+		author_id: "usr_05hq8k2m3n4p5q6r7s8t9u0v",
+		reviewer_ids: ["usr_01hq8k2m3n4p5q6r7s8t9u0v"],
+		affected_areas: ["backend", "queues", "notifications"],
+		github_pr_url: "https://github.com/acme/app/pull/302",
+		linked_issue_url: null,
+		brief: {
+			what_changed:
+				"Replaces the custom queue implementation with BullMQ. Moves all notification jobs — email, push, webhook — to BullMQ workers. Adds a Bull Board dashboard at /admin/queues.",
+			why: "Custom queue has no retry logic and loses jobs on restart. BullMQ gives us retries, backoff, and visibility for free.",
+			how_to_verify: [
+				{
+					id: "v1",
+					text: "Trigger an email notification in staging — confirm delivered",
+					checked: false,
+				},
+				{
+					id: "v2",
+					text: "Kill the worker mid-job — confirm job retries on restart",
+					checked: false,
+				},
+				{
+					id: "v3",
+					text: "Open /admin/queues — confirm Bull Board renders job history",
+					checked: false,
+				},
+			],
+			risk_notes:
+				"Adds Redis as a hard dependency for notifications. Existing queued jobs will not migrate automatically.",
+		},
+		comments: [
+			{
+				id: "cmt_03hq8k2m3n4p5q6r7s8t9u0v",
+				author_id: "usr_01hq8k2m3n4p5q6r7s8t9u0v",
+				type: "BLOCKER" as CommentType,
+				body: "The Bull Board route at /admin/queues has no auth guard. Anyone with the URL can see job payloads which may contain PII.",
+				line_reference: "server/admin/queues.ts:14",
+				resolved: false,
+				resolved_by: null,
+				resolved_at: null,
+				created_at: "2026-03-30T16:00:00.000Z",
+			},
+			{
+				id: "cmt_04hq8k2m3n4p5q6r7s8t9u0v",
+				author_id: "usr_01hq8k2m3n4p5q6r7s8t9u0v",
+				type: "SUGGESTION" as CommentType,
+				body: "Consider adding a dead letter queue for jobs that fail all retries. Makes debugging production issues significantly easier.",
+				line_reference: null,
+				resolved: false,
+				resolved_by: null,
+				resolved_at: null,
+				created_at: "2026-03-30T16:05:00.000Z",
+			},
+		],
+		verdict: null,
+		created_at: "2026-03-29T14:00:00.000Z",
+		ready_at: "2026-03-30T09:00:00.000Z",
+		first_review_at: "2026-03-30T15:45:00.000Z",
+		resolved_at: null,
+		shipped_at: null,
+	},
+
+	{
+		id: "crf_08hq8k2m3n4p5q6r7s8t9u0v",
+		identifier: "CRF-034",
+		title: "Add export rate limiting to /api/export endpoint",
+		status: "IN_REVIEW" as ChangeStatus,
+		risk_level: "MEDIUM" as RiskLevel,
+		author_id: "usr_03hq8k2m3n4p5q6r7s8t9u0v",
+		reviewer_ids: ["usr_02hq8k2m3n4p5q6r7s8t9u0v"],
+		affected_areas: ["api", "export"],
+		github_pr_url: "https://github.com/acme/app/pull/299",
+		linked_issue_url: null,
+		brief: {
+			what_changed:
+				"Adds a 5 req/min rate limit to /api/export per user. Large exports now queue instead of running concurrently. Adds an export_jobs table to track queue position.",
+			why: "Export endpoint is being hammered by a few power users and causing DB slowdowns for everyone else.",
+			how_to_verify: [
+				{
+					id: "v1",
+					text: "Trigger 6 exports in 60s — confirm 6th is queued not rejected",
+					checked: false,
+				},
+				{
+					id: "v2",
+					text: "Confirm export_jobs table is populated correctly",
+					checked: false,
+				},
+			],
+			risk_notes: null,
+		},
+		comments: [
+			{
+				id: "cmt_05hq8k2m3n4p5q6r7s8t9u0v",
+				author_id: "usr_02hq8k2m3n4p5q6r7s8t9u0v",
+				type: "SUGGESTION" as CommentType,
+				body: "The queue position is not exposed to the user anywhere. They'll just see a spinner with no feedback. Worth adding a simple status endpoint.",
+				line_reference: null,
+				resolved: false,
+				resolved_by: null,
+				resolved_at: null,
+				created_at: "2026-03-31T09:00:00.000Z",
+			},
+		],
+		verdict: null,
+		created_at: "2026-03-30T10:00:00.000Z",
+		ready_at: "2026-03-30T13:00:00.000Z",
+		first_review_at: "2026-03-31T08:30:00.000Z",
+		resolved_at: null,
+		shipped_at: null,
+	},
+
+	// ── REVISING ──────────────────────────────────────────
+
+	{
+		id: "crf_09hq8k2m3n4p5q6r7s8t9u0v",
+		identifier: "CRF-033",
+		title: "Replace legacy feature flag system with LaunchDarkly",
+		status: "REVISING" as ChangeStatus,
+		risk_level: "MEDIUM" as RiskLevel,
+		author_id: "usr_06hq8k2m3n4p5q6r7s8t9u0v",
+		reviewer_ids: ["usr_01hq8k2m3n4p5q6r7s8t9u0v"],
+		affected_areas: ["infra", "feature-flags"],
+		github_pr_url: "https://github.com/acme/app/pull/297",
+		linked_issue_url: "https://linear.app/acme/issue/ACM-203",
+		brief: {
+			what_changed:
+				"Replaces internal flag system with LaunchDarkly SDK v3. All 14 existing flags migrated. Removes the feature_flags table and admin UI.",
+			why: "Internal system has no percentage rollout or user targeting. LaunchDarkly gives us that plus audit logs.",
+			how_to_verify: [
+				{
+					id: "v1",
+					text: "Confirm all 14 flags are present in LaunchDarkly dashboard",
+					checked: true,
+				},
+				{
+					id: "v2",
+					text: "Toggle a flag in LD — confirm app behaviour changes within 30s",
+					checked: true,
+				},
+				{
+					id: "v3",
+					text: "Confirm feature_flags table is dropped cleanly with no FK errors",
+					checked: false,
+				},
+			],
+			risk_notes:
+				"If LaunchDarkly SDK fails to initialise, all flags default to false. Confirm default states are safe before deploying.",
+		},
+		comments: [
+			{
+				id: "cmt_06hq8k2m3n4p5q6r7s8t9u0v",
+				author_id: "usr_01hq8k2m3n4p5q6r7s8t9u0v",
+				type: "BLOCKER" as CommentType,
+				body: "The disabled fallback for the payments flag defaults to false which would disable payments entirely if LD goes down. This needs to default to true.",
+				line_reference: "lib/flags/payments.ts:8",
+				resolved: false,
+				resolved_by: null,
+				resolved_at: null,
+				created_at: "2026-03-30T14:00:00.000Z",
+			},
+		],
+		verdict: {
+			submitted_by: "usr_01hq8k2m3n4p5q6r7s8t9u0v",
+			type: "NEEDS_REREVIEW" as VerdictType,
+			note: "One blocker on the payments flag fallback. Everything else looks solid. Fix and I will approve.",
+			submitted_at: "2026-03-30T14:10:00.000Z",
+		},
+		created_at: "2026-03-28T10:00:00.000Z",
+		ready_at: "2026-03-29T09:00:00.000Z",
+		first_review_at: "2026-03-30T13:00:00.000Z",
+		resolved_at: null,
+		shipped_at: null,
+	},
+
+	// ── SHIPPED ───────────────────────────────────────────
+
+	{
+		id: "crf_10hq8k2m3n4p5q6r7s8t9u0v",
+		identifier: "CRF-032",
+		title: "Fix sidebar flicker on route change",
+		status: "SHIPPED" as ChangeStatus,
+		risk_level: "LOW" as RiskLevel,
+		author_id: "usr_01hq8k2m3n4p5q6r7s8t9u0v",
+		reviewer_ids: ["usr_02hq8k2m3n4p5q6r7s8t9u0v"],
+		affected_areas: ["frontend"],
+		github_pr_url: "https://github.com/acme/app/pull/294",
+		linked_issue_url: null,
+		brief: {
+			what_changed:
+				"Fixes a layout shift in the sidebar caused by a missing will-change hint. Sidebar now stays stable during route transitions.",
+			why: "Reported by multiple users as jarring. Easy fix with high UX impact.",
+			how_to_verify: [
+				{
+					id: "v1",
+					text: "Navigate between routes rapidly — confirm sidebar stays stable",
+					checked: true,
+				},
+			],
+			risk_notes: null,
+		},
+		comments: [],
+		verdict: {
+			submitted_by: "usr_02hq8k2m3n4p5q6r7s8t9u0v",
+			type: "SHIP_IT" as VerdictType,
+			note: "Clean fix. Verified in staging.",
+			submitted_at: "2026-03-31T08:00:00.000Z",
+		},
+		created_at: "2026-03-30T15:00:00.000Z",
+		ready_at: "2026-03-30T15:30:00.000Z",
+		first_review_at: "2026-03-31T07:45:00.000Z",
+		resolved_at: "2026-03-31T08:00:00.000Z",
+		shipped_at: "2026-03-31T08:30:00.000Z",
+	},
+
+	{
+		id: "crf_11hq8k2m3n4p5q6r7s8t9u0v",
+		identifier: "CRF-031",
+		title: "Add loading skeleton to dashboard cards",
+		status: "SHIPPED" as ChangeStatus,
+		risk_level: "LOW" as RiskLevel,
+		author_id: "usr_04hq8k2m3n4p5q6r7s8t9u0v",
+		reviewer_ids: ["usr_01hq8k2m3n4p5q6r7s8t9u0v"],
+		affected_areas: ["frontend", "dashboard"],
+		github_pr_url: null,
+		linked_issue_url: "https://linear.app/acme/issue/ACM-278",
+		brief: {
+			what_changed:
+				"Adds shimmer skeleton loaders to the 4 dashboard metric cards. Skeleton matches the exact dimensions of the loaded state.",
+			why: "Dashboard feels broken on slow connections — cards snap in with no loading state.",
+			how_to_verify: [
+				{
+					id: "v1",
+					text: "Throttle network to Slow 3G in devtools — confirm skeletons appear",
+					checked: true,
+				},
+				{
+					id: "v2",
+					text: "Confirm skeleton dimensions match loaded card dimensions",
+					checked: true,
+				},
+			],
+			risk_notes: null,
+		},
+		comments: [],
+		verdict: {
+			submitted_by: "usr_01hq8k2m3n4p5q6r7s8t9u0v",
+			type: "SHIP_IT" as VerdictType,
+			note: null,
+			submitted_at: "2026-03-30T17:00:00.000Z",
+		},
+		created_at: "2026-03-30T11:00:00.000Z",
+		ready_at: "2026-03-30T13:00:00.000Z",
+		first_review_at: "2026-03-30T16:30:00.000Z",
+		resolved_at: "2026-03-30T17:00:00.000Z",
+		shipped_at: "2026-03-30T17:45:00.000Z",
+	},
+
+	{
+		id: "crf_12hq8k2m3n4p5q6r7s8t9u0v",
+		identifier: "CRF-030",
+		title: "Migrate analytics events to new schema",
+		status: "SHIPPED" as ChangeStatus,
+		risk_level: "MEDIUM" as RiskLevel,
+		author_id: "usr_08hq8k2m3n4p5q6r7s8t9u0v",
+		reviewer_ids: ["usr_02hq8k2m3n4p5q6r7s8t9u0v"],
+		affected_areas: ["analytics", "backend"],
+		github_pr_url: "https://github.com/acme/app/pull/291",
+		linked_issue_url: "https://linear.app/acme/issue/ACM-265",
+		brief: {
+			what_changed:
+				"Migrates all analytics event tracking from the legacy schema to the new unified event schema. 23 event types updated. Old schema kept in parallel for 30 days.",
+			why: "New schema enables funnel analysis in the analytics dashboard. Required before the Q2 growth reporting rollout.",
+			how_to_verify: [
+				{
+					id: "v1",
+					text: "Trigger 5 key events in staging — confirm new schema in event log",
+					checked: true,
+				},
+				{
+					id: "v2",
+					text: "Confirm old events still firing in parallel for 30 day window",
+					checked: true,
+				},
+				{
+					id: "v3",
+					text: "Run analytics dashboard — confirm no broken queries",
+					checked: true,
+				},
+			],
+			risk_notes: null,
+		},
+		comments: [],
+		verdict: {
+			submitted_by: "usr_02hq8k2m3n4p5q6r7s8t9u0v",
+			type: "SHIP_IT" as VerdictType,
+			note: "Thorough verification checklist. Well done.",
+			submitted_at: "2026-03-30T12:00:00.000Z",
+		},
+		created_at: "2026-03-29T08:00:00.000Z",
+		ready_at: "2026-03-29T10:00:00.000Z",
+		first_review_at: "2026-03-30T09:00:00.000Z",
+		resolved_at: "2026-03-30T12:00:00.000Z",
+		shipped_at: "2026-03-30T14:00:00.000Z",
+	},
+];

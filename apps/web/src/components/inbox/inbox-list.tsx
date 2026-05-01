@@ -1,10 +1,10 @@
 "use client";
 
-import { ScrollableContainer } from "@/components/layout/scrollable-container";
-import { PageHeader } from "@/components/layout/page-header";
-import { mockInbox } from "@/config/dummy-datas/inbox-data";
 import { motion } from "motion/react";
 import { useState } from "react";
+import { PageHeader } from "@/components/layout/page-header";
+import { ScrollableContainer } from "@/components/layout/scrollable-container";
+import { mockInbox } from "@/config/dummy-datas/inbox-data";
 import { InboxItemCard } from "./inbox-item";
 
 export function InboxList() {
@@ -24,7 +24,7 @@ export function InboxList() {
 		<div className="flex h-full flex-col">
 			<PageHeader title={"Inbox"} />
 			<ScrollableContainer>
-				<div className="flex flex-col gap-px pl-2 mt-2">
+				<div className="mt-2 flex flex-col gap-px pl-2">
 					{items.map((item, index) => (
 						<motion.div
 							animate={{ opacity: 1, y: 0 }}
