@@ -168,7 +168,7 @@ export function ChangesList() {
 											<div className="relative z-10">
 												<Button
 													className={cn(
-														"queue-group-chevron group",
+														"queue-group-chevron group text-(--gray-a8) active:bg-transparent [@media(hover:hover)_and_(pointer:fine)]:hover:bg-transparent",
 														isOpen ? "" : "-rotate-90"
 													)}
 													size={"icon-sm"}
