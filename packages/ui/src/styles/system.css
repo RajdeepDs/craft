@@ -78,6 +78,11 @@
 	--standout-hover: var(--gray-a3);
 	--standout-foreground: var(--black-a11);
 	--standout-foreground-hover: var(--black-a12);
+
+	--surface-item-hover: var(--gray-a2);
+	--surface-item-active: var(--gray-a3);
+	--surface-item-foreground: var(--black-a8);
+	--surface-item-foreground-active: var(--black-a11);
 }
 
 .dark {
@@ -91,9 +96,16 @@
 	--standout-hover: var(--gray-a3);
 	--standout-foreground: var(--white-a11);
 	--standout-foreground-hover: var(--white-a12);
+
+	--surface-item-hover: var(--white-a1);
+	--surface-item-active: var(--white-a2);
+	--surface-item-foreground: var(--white-a8);
+	--surface-item-foreground-active: var(--white-a12);
 }
 
 @theme inline {
+	--header-height: 2.75rem;
+
 	--font-sans: var(--font-inter), sans-serif;
 	--font-mono: var(--font-geist-mono), monospace;
 
@@ -142,10 +154,10 @@
 	--color-page: var(--page);
 
 	--color-surface: var(--bg);
-	--color-surface-item-hover: var(--gray-a2);
-	--color-surface-item-active: var(--gray-a3);
-	--color-surface-item-foreground: var(--gray-11);
-	--color-surface-item-foreground-active: var(--gray-12);
+	--color-surface-item-hover: var(--surface-item-hover);
+	--color-surface-item-active: var(--surface-item-active);
+	--color-surface-item-foreground: var(--surface-item-foreground);
+	--color-surface-item-foreground-active: var(--surface-item-foreground-active);
 
 	--color-standout: var(--standout);
 	--color-standout-hover: var(--standout-hover);

@@ -21,8 +21,8 @@ import {
 import { useIsMobile } from "@craft/ui/hooks/use-mobile";
 import { cn } from "@craft/ui/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
-import { PanelLeftIcon } from "lucide-react";
 import * as React from "react";
+import { Icon } from "./icon";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -261,8 +261,9 @@ function Sidebar({
 function SidebarTrigger({
 	className,
 	onClick,
+	isMobile,
 	...props
-}: React.ComponentProps<typeof Button>) {
+}: React.ComponentProps<typeof Button> & { isMobile?: boolean }) {
 	const { toggleSidebar } = useSidebar();
 
 	return (
@@ -278,7 +279,10 @@ function SidebarTrigger({
 			variant="tertiary"
 			{...props}
 		>
-			<PanelLeftIcon />
+			<Icon
+				name="IconSidebarSimpleLeftWide"
+				variant={isMobile ? "filled" : "outline"}
+			/>
 			<span className="sr-only">Toggle Sidebar</span>
 		</Button>
 	);
@@ -407,7 +411,7 @@ function SidebarGroupLabel({
 		props: mergeProps<"div">(
 			{
 				className: cn(
-					"flex h-8 shrink-0 items-center rounded-md px-2 font-medium text-surface-item-foreground/70 text-xs outline-hidden ring-sidebar-ring transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 [&>svg]:size-4 [&>svg]:shrink-0",
+					"flex h-8 shrink-0 items-center rounded-md px-2 font-medium text-surface-item-foreground text-xs outline-hidden ring-sidebar-ring transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 [&>svg]:size-4 [&>svg]:shrink-0",
 					className
 				),
 			},
@@ -482,7 +486,7 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
 }
 
 const sidebarMenuButtonVariants = cva(
-	"peer/menu-button group/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-caption outline-hidden ring-sidebar-ring transition-[width,height,padding] hover:bg-surface-item-hover hover:text-surface-item-foreground-active focus-visible:ring-2 active:bg-surface-item-active active:text-surface-item-foreground-active disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-active:bg-surface-item-active data-active:font-medium data-active:text-surface-item-foreground-active data-open:hover:bg-surface-item-hover data-open:hover:text-surface-item-foreground-active group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&_svg]:size-4 [&_svg]:shrink-0",
+	"peer/menu-button group/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left font-medium text-caption outline-hidden ring-sidebar-ring transition-[width,height,padding] hover:bg-surface-item-hover hover:text-surface-item-foreground-active focus-visible:ring-2 active:bg-surface-item-active active:text-surface-item-foreground-active disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-active:bg-surface-item-active data-active:font-medium data-active:text-surface-item-foreground-active data-open:hover:bg-surface-item-hover data-open:hover:text-surface-item-foreground-active group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&_svg]:size-4 [&_svg]:shrink-0",
 	{
 		variants: {
 			variant: {

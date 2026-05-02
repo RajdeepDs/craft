@@ -198,6 +198,23 @@ const GitHub = (props: SVGProps<SVGSVGElement>) => (
 	</svg>
 );
 
+const CollapseDownIcon = (props: SVGProps<SVGSVGElement>) => (
+	<svg
+		fill="none"
+		height="24"
+		viewBox="0 0 24 24"
+		width="24"
+		xmlns="http://www.w3.org/2000/svg"
+		{...props}
+	>
+		<title>Collapse Down Icon</title>
+		<path
+			d="M8.89253 8.74194C7.48139 8.74194 6.68759 10.3666 7.55396 11.4816L10.3551 15.0866C11.034 15.9604 12.3533 15.9604 13.0322 15.0866L15.8333 11.4816C16.6996 10.3666 15.9058 8.74194 14.4947 8.74194H8.89253Z"
+			fill="currentColor"
+		/>
+	</svg>
+);
+
 // Re-export commonly used icons for convenience
 export const IconLoader = (
 	OutlineIcons as unknown as Record<string, ComponentType<CentralIconBaseProps>>
@@ -207,4 +224,4 @@ export const IconMagnifyingGlass = (
 	OutlineIcons as unknown as Record<string, ComponentType<CentralIconBaseProps>>
 ).IconMagnifyingGlass;
 
-export { GitHub };
+export { CollapseDownIcon, GitHub };
