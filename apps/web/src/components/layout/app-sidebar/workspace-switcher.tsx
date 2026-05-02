@@ -1,4 +1,10 @@
-import { Avatar, AvatarFallback } from "@craft/ui/components/avatar";
+"use client";
+
+import {
+	Avatar,
+	AvatarFallback,
+	AvatarImage,
+} from "@craft/ui/components/avatar";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -18,8 +24,19 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 } from "@craft/ui/components/sidebar";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 export function WorkspaceSwitcher() {
+	const { data: session } = authClient.useSession();
+	const user = session?.user;
+	const router = useRouter();
+
+	async function handleLogOut() {
+		await authClient.signOut();
+		router.push("/login");
+	}
+
 	return (
 		<SidebarMenu>
 			<SidebarMenuItem className="flex items-center justify-between">
@@ -53,15 +70,25 @@ export function WorkspaceSwitcher() {
 							<DropdownMenuSub>
 								<DropdownMenuSubTrigger>Switch account</DropdownMenuSubTrigger>
 								<DropdownMenuSubContent className="min-w-52" sideOffset={4}>
-									<DropdownMenuItem>John Doe</DropdownMenuItem>
+									<DropdownMenuItem className="gap-2.5">
+										<Avatar size="xs">
+											{user?.image && <AvatarImage src={user.image} alt={user.name ?? ""} />}
+											<AvatarFallback>
+												{user?.name?.[0]?.toUpperCase() ?? user?.email?.[0]?.toUpperCase() ?? "?"}
+											</AvatarFallback>
+										</Avatar>
+										<div className="flex min-w-0 flex-col">
+											<span className="truncate text-caption text-gray-11">{user?.email}</span>
+										</div>
+									</DropdownMenuItem>
 									<DropdownMenuSeparator />
-									<DropdownMenuItem className="pl-2.5">
+									<DropdownMenuItem className="pl-3 gap-2.5">
 										<Icon name="IconUserAddRight" variant="filled" />
 										Add account
 									</DropdownMenuItem>
 								</DropdownMenuSubContent>
 							</DropdownMenuSub>
-							<DropdownMenuItem variant="destructive">Log out</DropdownMenuItem>
+							<DropdownMenuItem variant="destructive" onClick={handleLogOut}>Log out</DropdownMenuItem>
 						</DropdownMenuGroup>
 					</DropdownMenuContent>
 				</DropdownMenu>
