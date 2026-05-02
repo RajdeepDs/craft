@@ -7,9 +7,7 @@ import { z } from "zod";
 import { publicProcedure } from "../index";
 
 export const appRouter = {
-	healthCheck: publicProcedure.handler(() => {
-		return "OK";
-	}),
+	healthCheck: publicProcedure.handler(() => "OK"),
 	joinWaitlist: publicProcedure
 		.input(
 			z.object({

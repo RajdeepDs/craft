@@ -1,6 +1,10 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@craft/ui/components/avatar";
+import {
+	Avatar,
+	AvatarFallback,
+	AvatarImage,
+} from "@craft/ui/components/avatar";
 import {
 	Item,
 	ItemActions,
@@ -9,14 +13,15 @@ import {
 	ItemMedia,
 	ItemTitle,
 } from "@craft/ui/components/item";
+import { cn } from "@craft/ui/lib/utils";
 
-type InboxItem = {
+interface InboxItem {
+	action: "needs_review" | "blocked" | "re_review";
+	author: { name: string; avatar?: string };
 	id: string;
 	title: string;
-	author: { name: string; avatar?: string };
-	action: "needs_review" | "blocked" | "re_review";
 	waitingSince: string;
-};
+}
 
 const actionLabel: Record<InboxItem["action"], string> = {
 	needs_review: "assigned you",
@@ -36,20 +41,29 @@ function getInitials(name: string) {
 function relativeTime(iso: string): string {
 	const diffMs = Date.now() - new Date(iso).getTime();
 	const mins = Math.floor(diffMs / 60_000);
-	if (mins < 60) return `${mins}m`;
+	if (mins < 60) {
+		return `${mins}m`;
+	}
 	const hrs = Math.floor(mins / 60);
-	if (hrs < 24) return `${hrs}h`;
+	if (hrs < 24) {
+		return `${hrs}h`;
+	}
 	return `${Math.floor(hrs / 24)}d`;
 }
 
 interface InboxItemCardProps {
-	item: InboxItem;
-	isSelected?: boolean;
 	isRead?: boolean;
+	isSelected?: boolean;
+	item: InboxItem;
 	onSelect?: (id: string) => void;
 }
 
-export function InboxItemCard({ item, isSelected, isRead, onSelect }: InboxItemCardProps) {
+export function InboxItemCard({
+	item,
+	isSelected,
+	isRead,
+	onSelect,
+}: InboxItemCardProps) {
 	return (
 		<Item
 			className="cursor-default transition-[transform,background-color] duration-150 hover:bg-surface-item-hover data-[selected=true]:bg-surface-item-active"
@@ -65,8 +79,19 @@ export function InboxItemCard({ item, isSelected, isRead, onSelect }: InboxItemC
 			</ItemMedia>
 			<ItemContent className="min-w-0 gap-0">
 				<ItemTitle className="w-full items-center">
-					{!isRead && <span className="size-1.5 shrink-0 rounded-full bg-(--indigo-a10)" />}
-					<span className={`truncate ${isSelected ? "text-primary-foreground" : isRead ? "text-secondary-foreground" : ""}`}>{item.title}</span>
+					{!isRead && (
+						<span className="size-1.5 shrink-0 rounded-full bg-(--indigo-a10)" />
+					)}
+					<span
+						className={cn(
+							"truncate",
+							isSelected
+								? "text-primary-foreground"
+								: isRead && "text-secondary-foreground"
+						)}
+					>
+						{item.title}
+					</span>
 				</ItemTitle>
 				<ItemDescription className="text-caption text-secondary-foreground">
 					{item.author.name} {actionLabel[item.action]}

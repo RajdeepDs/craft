@@ -30,7 +30,7 @@ const sizeMap = {
 
 function getSizeValue(size: IconProps["size"]): string | number | undefined {
 	if (size === undefined) {
-		return undefined;
+		return;
 	}
 	if (typeof size === "number") {
 		return size;

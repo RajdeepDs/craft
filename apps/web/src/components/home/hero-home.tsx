@@ -45,7 +45,7 @@ function AnimatedWords({
 					}}
 					className={className}
 					initial={initial}
-					key={i}
+					key={word}
 					style={{ display: "inline-block", whiteSpace: "pre" }}
 					transition={{
 						delay: shouldReduceMotion ? 0 : delayOffset + i * WORD_STAGGER,

@@ -24,8 +24,8 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 } from "@craft/ui/components/sidebar";
-import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 export function WorkspaceSwitcher() {
 	const { data: session } = authClient.useSession();
@@ -72,23 +72,31 @@ export function WorkspaceSwitcher() {
 								<DropdownMenuSubContent className="min-w-52" sideOffset={4}>
 									<DropdownMenuItem className="gap-2.5">
 										<Avatar size="xs">
-											{user?.image && <AvatarImage src={user.image} alt={user.name ?? ""} />}
+											{user?.image && (
+												<AvatarImage alt={user.name ?? ""} src={user.image} />
+											)}
 											<AvatarFallback>
-												{user?.name?.[0]?.toUpperCase() ?? user?.email?.[0]?.toUpperCase() ?? "?"}
+												{user?.name?.[0]?.toUpperCase() ??
+													user?.email?.[0]?.toUpperCase() ??
+													"?"}
 											</AvatarFallback>
 										</Avatar>
 										<div className="flex min-w-0 flex-col">
-											<span className="truncate text-caption text-gray-11">{user?.email}</span>
+											<span className="truncate text-caption text-gray-11">
+												{user?.email}
+											</span>
 										</div>
 									</DropdownMenuItem>
 									<DropdownMenuSeparator />
-									<DropdownMenuItem className="pl-3 gap-2.5">
+									<DropdownMenuItem className="gap-2.5 pl-3">
 										<Icon name="IconUserAddRight" variant="filled" />
 										Add account
 									</DropdownMenuItem>
 								</DropdownMenuSubContent>
 							</DropdownMenuSub>
-							<DropdownMenuItem variant="destructive" onClick={handleLogOut}>Log out</DropdownMenuItem>
+							<DropdownMenuItem onClick={handleLogOut} variant="destructive">
+								Log out
+							</DropdownMenuItem>
 						</DropdownMenuGroup>
 					</DropdownMenuContent>
 				</DropdownMenu>
