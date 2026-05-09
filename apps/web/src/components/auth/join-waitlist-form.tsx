@@ -7,20 +7,23 @@ import { useForm } from "@tanstack/react-form";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import z from "zod";
-import { orpc } from "@/utils/orpc";
+import { AlreadyOnWaitlist, rpc } from "@/utils/rpc";
 
 export function JoinWaitlistForm() {
-	const mutation = useMutation(
-		orpc.joinWaitlist.mutationOptions({
-			onSuccess: (data) => {
-				toast.success(data.message);
-				form.reset();
-			},
-			onError: (error) => {
-				toast.error(error.message || "Something went wrong");
-			},
-		})
-	);
+	const mutation = useMutation({
+		mutationFn: ({ email }: { email: string }) => rpc.joinWaitlist({ email }),
+		onSuccess: (data) => {
+			toast.success(data.message);
+			form.reset();
+		},
+		onError: (error) => {
+			if (error instanceof AlreadyOnWaitlist) {
+				toast.error("You're already on the waitlist.");
+			} else {
+				toast.error("Something went wrong. Please try again.");
+			}
+		},
+	});
 
 	const form = useForm({
 		defaultValues: {

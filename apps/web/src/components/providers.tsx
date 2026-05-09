@@ -5,7 +5,7 @@ import { TooltipProvider } from "@craft/ui/components/tooltip";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import { queryClient } from "@/utils/orpc";
+import { queryClient } from "@/utils/rpc";
 
 import { ThemeProvider } from "./theme-provider";
 

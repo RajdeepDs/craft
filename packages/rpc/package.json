@@ -1,5 +1,5 @@
 {
-  "name": "@craft/api",
+  "name": "@craft/rpc",
   "type": "module",
   "exports": {
     ".": {
@@ -11,18 +11,15 @@
   },
   "scripts": {},
   "dependencies": {
-    "@craft/auth": "workspace:*",
     "@craft/db": "workspace:*",
     "@craft/env": "workspace:*",
-    "@orpc/client": "catalog:",
-    "@orpc/openapi": "catalog:",
-    "@orpc/server": "catalog:",
-    "@orpc/zod": "catalog:",
+    "@craft/services": "workspace:*",
+    "@effect/platform": "catalog:",
+    "@effect/platform-node": "catalog:",
+    "@effect/rpc": "catalog:",
     "dotenv": "catalog:",
-    "drizzle-orm": "^0.45.2",
-    "nanoid": "^5.1.7",
-    "next": "catalog:",
-    "zod": "catalog:"
+    "effect": "catalog:",
+    "next": "catalog:"
   },
   "devDependencies": {
     "@craft/config": "workspace:*",

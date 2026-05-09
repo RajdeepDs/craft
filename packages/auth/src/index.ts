@@ -1,14 +1,20 @@
 import { createDb } from "@craft/db";
 import * as schema from "@craft/db/schema/auth";
-import { waitlist } from "@craft/db/schema/waitlist";
 import { env } from "@craft/env/server";
+import {
+	checkWaitlistAcceptance,
+	checkWaitlistAcceptanceByUserId,
+} from "@craft/services";
 import { APIError, betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
-import { and, eq } from "drizzle-orm";
+import { Effect, Either } from "effect";
 
 const WAITLIST_REJECTION_MESSAGE =
 	"You're on the waitlist. We'll notify you once you're approved.";
+
+const VERIFICATION_FAILURE_MESSAGE =
+	"Unable to verify access. Please try again.";
 
 export function createAuth() {
 	const db = createDb();
@@ -70,15 +76,11 @@ export function createAuth() {
 			user: {
 				create: {
 					before: async (user) => {
-						const acceptedRow = await db
-							.select({ id: waitlist.id })
-							.from(waitlist)
-							.where(
-								and(eq(waitlist.email, user.email), eq(waitlist.accepted, true))
-							)
-							.limit(1);
+						const result = await Effect.runPromise(
+							checkWaitlistAcceptance(user.email).pipe(Effect.either)
+						);
 
-						if (acceptedRow.length === 0) {
+						if (Either.isLeft(result)) {
 							throw new APIError("UNAUTHORIZED", {
 								message: WAITLIST_REJECTION_MESSAGE,
 							});
@@ -91,33 +93,20 @@ export function createAuth() {
 			session: {
 				create: {
 					before: async (session) => {
-						const [currentUser] = await db
-							.select({ email: schema.user.email })
-							.from(schema.user)
-							.where(eq(schema.user.id, session.userId))
-							.limit(1);
-
-						if (!currentUser?.email) {
-							throw new APIError("UNAUTHORIZED", {
-								message: "Unable to verify access. Please try again.",
-							});
-						}
-
-						const acceptedRow = await db
-							.select({ id: waitlist.id })
-							.from(waitlist)
-							.where(
-								and(
-									eq(waitlist.email, currentUser.email),
-									eq(waitlist.accepted, true)
-								)
+						const result = await Effect.runPromise(
+							checkWaitlistAcceptanceByUserId(session.userId).pipe(
+								Effect.either
 							)
-							.limit(1);
+						);
 
-						if (acceptedRow.length === 0) {
-							throw new APIError("UNAUTHORIZED", {
-								message: WAITLIST_REJECTION_MESSAGE,
-							});
+						if (Either.isLeft(result)) {
+							const error = result.left;
+							const message =
+								error._tag === "NotApproved"
+									? WAITLIST_REJECTION_MESSAGE
+									: VERIFICATION_FAILURE_MESSAGE;
+
+							throw new APIError("UNAUTHORIZED", { message });
 						}
 
 						return { data: session };
