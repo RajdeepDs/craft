@@ -114,6 +114,7 @@
     "packages/rpc": {
       "name": "@craft/rpc",
       "dependencies": {
+        "@craft/auth": "workspace:*",
         "@craft/db": "workspace:*",
         "@craft/env": "workspace:*",
         "@craft/services": "workspace:*",
