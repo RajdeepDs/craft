@@ -1,8 +1,8 @@
-export { HandlersLive } from "./handlers.js";
+export { HandlersLive } from "./handlers";
 export {
 	AlreadyOnWaitlist,
 	DatabaseError,
 	JoinWaitlistSuccess,
 	WaitlistRpcs,
-} from "./requests.js";
-export { disposeRpc, rpcHandler } from "./server.js";
+} from "./requests";
+export { disposeRpc, rpcHandler } from "./server";

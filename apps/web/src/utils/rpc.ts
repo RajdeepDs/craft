@@ -1,4 +1,4 @@
-import { makeClientLayer, RpcClient, WaitlistRpcs } from "@craft/rpc/client";
+import { makeClient } from "@craft/rpc/client";
 
 export { AlreadyOnWaitlist, DatabaseError } from "@craft/rpc/requests";
 
@@ -26,25 +26,12 @@ export const queryClient = new QueryClient({
 	},
 });
 
-const clientLayer = makeClientLayer("/api/rpc");
-
-const run = <A, E>(effect: Effect.Effect<A, E, never>) =>
-	Effect.runPromise(effect);
+const clientEffect = makeClient("/api/rpc");
 
 export const rpc = {
-	healthCheck: () =>
-		run(
-			Effect.gen(function* () {
-				const client = yield* RpcClient.make(WaitlistRpcs);
-				return yield* client.HealthCheck({});
-			}).pipe(Effect.scoped, Effect.provide(clientLayer))
-		),
-
 	joinWaitlist: (input: { email: string }) =>
-		run(
-			Effect.gen(function* () {
-				const client = yield* RpcClient.make(WaitlistRpcs);
-				return yield* client.JoinWaitlist(input);
-			}).pipe(Effect.scoped, Effect.provide(clientLayer))
-		),
+		Effect.gen(function* () {
+			const client = yield* clientEffect;
+			return yield* client.JoinWaitlist(input);
+		}).pipe(Effect.scoped, Effect.runPromise),
 };

@@ -1,11 +1,14 @@
 import { FetchHttpClient } from "@effect/platform";
 import { RpcClient, RpcSerialization } from "@effect/rpc";
-import { Layer } from "effect";
+import { Effect, Layer } from "effect";
+import { WaitlistRpcs } from "./requests";
 
-export { RpcClient } from "@effect/rpc";
-export { WaitlistRpcs } from "./requests.js";
+export { WaitlistRpcs } from "./requests";
 
 export const makeClientLayer = (url: string) =>
 	RpcClient.layerProtocolHttp({ url }).pipe(
 		Layer.provide([FetchHttpClient.layer, RpcSerialization.layerNdjson])
 	);
+
+export const makeClient = (url: string) =>
+	RpcClient.make(WaitlistRpcs).pipe(Effect.provide(makeClientLayer(url)));
